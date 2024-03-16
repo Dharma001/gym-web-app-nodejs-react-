@@ -14,14 +14,15 @@ export const createMembershipMember = async (req, res) => {
     const end_date = new Date(start_date);
     end_date.setDate(end_date.getDate() + durationInDays);
 
-    const deu_amount = membership.price - pay_amount;
+    const due_amount = membership.price - pay_amount;
 
     const membershipMember = await MembershipMember.create({
       user_id, 
       start_date,
       end_date,
+      membership_id,
       pay_amount,
-      deu_amount
+      due_amount
     });
 
     res.status(201).json({ message: 'Membership member created successfully', membershipMember });
@@ -70,9 +71,9 @@ export const updateMembershipMemberById = async (req, res) => {
       return res.status(404).json({ message: 'Membership member not found' });
     }
 
-    const deu_amount = membershipMember.Membership.price - pay_amount;
+    const due_amount = membershipMember.Membership.price - pay_amount;
 
-    await membershipMember.update({ pay_amount, deu_amount });
+    await membershipMember.update({ pay_amount, due_amount });
 
     res.json({ message: 'Membership member updated successfully', membershipMember });
   } catch (error) {
