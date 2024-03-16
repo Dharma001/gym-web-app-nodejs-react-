@@ -57,6 +57,17 @@ function GymDashboard() {
             <i class="fa-regular fa-user mr-1 text-sm"></i> Users
                 </li>
               </Link>
+              <Link to="Memberships">
+            <li className="text-[16px] my-3 font-light  text-gray-300 w-full  hover:text-white hover:bg-purple-500 px-5 py-3">
+            <i class="fa-regular fa-user mr-1 text-sm"></i> Memberships
+                </li>
+              </Link>
+              <Link to="MembershipMembers">
+            <li className="text-[16px] my-3 font-light  text-gray-300 w-full  hover:text-white hover:bg-purple-500 px-5 py-3">
+            <i class="fa-regular fa-user mr-1 text-sm"></i> All Memberships
+                </li>
+              </Link>
+              
           </ul>
         </div>
         <button onClick={toggleSidebar} className=" left-0 text-white absolute bottom-0 text-[1.3rem] bg-blue-500 w-full py-3">

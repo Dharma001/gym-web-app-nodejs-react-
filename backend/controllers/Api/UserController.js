@@ -3,6 +3,16 @@ import  Role  from "../../models/Role.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+export const getUsersCountWithRole2 = async (req, res) => {
+  try {
+    const usersCount = await Users.count({ where: { role_id: 2 } });
+    res.json({ count: usersCount });
+  } catch (error) {
+    console.error('Error fetching Users count:', error);
+    res.status(500).json({ message: 'Failed to fetch Users count' });
+  }
+};
+
 export const getUsers = async (req, res) => {
   try {
     const users = await Users.findAll({ where: { role_id: 2 } });

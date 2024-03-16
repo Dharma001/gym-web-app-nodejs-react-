@@ -7,6 +7,11 @@ import Users from "./pages/Admin/Users/Users";
 import CreateUser from "./pages/Admin/Users/CreateUser";
 import MemberDashboard from "./Layouts/MemberDashboard";
 import GymDashboard from "./Layouts/GymDashboard";
+import Dashboard from "./pages/Admin/Dashboard";
+import CreateMembership from "./pages/Admin/Membership/CreateMembership";
+import Memberships from "./pages/Admin/Membership/Memberships";
+import CreateMembershipMember from "./pages/Admin/MemberMembership/CreateMembershipMember";
+import MembershipMembers from "./pages/Admin/MemberMembership/MembershipMembers";
 
 function isAuthenticated() {
   const accessToken = Cookies.get("accessToken");
@@ -43,7 +48,7 @@ function App() {
             <PrivateRoute
               element={<Login />}
               authenticated={!isAuthenticated()}
-              redirectTo="/admin"
+              redirectTo="/dashboard"
             />
           }
         />
@@ -69,7 +74,61 @@ function App() {
               />
             }
           />
-
+          <Route
+            path="Memberships"
+            element={
+              <PrivateAdminRoute
+                element={<Memberships />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+          <Route
+            path="createMembership"
+            element={
+              <PrivateAdminRoute
+                element={<CreateMembership />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+                    <Route
+            path="MembershipMembers"
+            element={
+              <PrivateAdminRoute
+                element={<MembershipMembers />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+          <Route
+            path="CreateMembershipMember"
+            element={
+              <PrivateAdminRoute
+                element={<CreateMembershipMember />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+          <Route
+            path="Dashboard"
+            element={
+              <PrivateAdminRoute
+                element={<Dashboard />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
           <Route
             path="users"
             element={
