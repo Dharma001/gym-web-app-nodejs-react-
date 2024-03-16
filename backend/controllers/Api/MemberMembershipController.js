@@ -36,8 +36,8 @@ export const getAllMembershipMembers = async (req, res) => {
   try {
     const membershipMembers = await MembershipMember.findAll({
       include: [
-        { model: User, attributes: ['id', 'name'] }, // Include User model and select specific attributes
-        { model: Membership, attributes: ['id', 'name'] } // Include Membership model and select specific attributes
+        { model: User, attributes: ['id', 'name'] },
+        { model: Membership, attributes: ['id', 'name'] }
       ]
     });
 
