@@ -59,8 +59,8 @@ const MembershipMembers = () => {
                 {membershipMembers.map(member => (
                   <tr key={member.id} className="hover:bg-gray-100">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{member.id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{member.user_id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{member.membership_id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{member.user.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{member.membership.name}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{member.start_date}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{member.end_date}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{member.pay_amount}</td>

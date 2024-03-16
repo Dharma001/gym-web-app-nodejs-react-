@@ -1,5 +1,7 @@
 import { Sequelize } from 'sequelize';
 import db from "../config/Database.js";
+import Users from './User.js';
+import Membership from './Membership.js';
 
 const { DataTypes } = Sequelize;
 
@@ -50,6 +52,7 @@ const MembershipMember = db.define('membership_members', {
   timestamps: true,
   underscored: true
 });
-
+MembershipMember.belongsTo(Users, { foreignKey: 'user_id' });
+MembershipMember.belongsTo(Membership, { foreignKey: 'membership_id' }); 
 
 export default MembershipMember;

@@ -67,7 +67,6 @@ function GymDashboard() {
             <i class="fa-regular fa-user mr-1 text-sm"></i> All Memberships
                 </li>
               </Link>
-              
           </ul>
         </div>
         <button onClick={toggleSidebar} className=" left-0 text-white absolute bottom-0 text-[1.3rem] bg-blue-500 w-full py-3">

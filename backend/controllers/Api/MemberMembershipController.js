@@ -34,13 +34,20 @@ export const createMembershipMember = async (req, res) => {
 
 export const getAllMembershipMembers = async (req, res) => {
   try {
-    const membershipMember = await MembershipMember.findAll();
-    res.json(membershipMember);
+    const membershipMembers = await MembershipMember.findAll({
+      include: [
+        { model: User, attributes: ['id', 'name'] }, // Include User model and select specific attributes
+        { model: Membership, attributes: ['id', 'name'] } // Include Membership model and select specific attributes
+      ]
+    });
+
+    res.json(membershipMembers);
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ message: "Failed to fetch memberships" });
+    res.status(500).json({ message: "Failed to fetch membership members" });
   }
 };
+
 
 export const getMembershipMemberById = async (req, res) => {
   const { id } = req.params;
