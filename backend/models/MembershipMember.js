@@ -9,7 +9,7 @@ const MembershipMember = db.define('membership_members', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true 
   },
   user_id: { 
     type: DataTypes.BIGINT,

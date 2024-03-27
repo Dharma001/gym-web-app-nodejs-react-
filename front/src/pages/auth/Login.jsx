@@ -54,7 +54,7 @@ function Login() {
         Cookies.set("roleId", roleId, { expires: 30 / 1440 });
         Cookies.set("userId", userId, { expires: 30 / 1440 });
         if (roleId === 1) {
-          navigate("/admin");
+          navigate("/admin/dashboard");
         } else {
           navigate("/");
         }
@@ -68,9 +68,10 @@ function Login() {
   return (
     <div className="">
     <Nav/>
-      <div className="w-full h-full my-5">
+      <div className="w-full h-full my-[8rem]">
         <div className="flex items-center justify-center">
-          <div className="flex flex-col gap-3 px-[40px] w-full xl:w-[28%] border py-[30px]">
+          <div className="flex flex-col gap-3 px-[40px] w-full xl:w-[25%] border border-gray-300 py-[30px]">
+            <p className="font-bold text-2xl">Login</p>
             <div className="flex ml-[-5px]">
               <img src="./img.png" className="w-14" alt="" />   
               <p className="mt-3 font-medium text-[1.1rem]">Wecome To Fitness Factory..</p>     
@@ -88,7 +89,7 @@ function Login() {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="Enter Your email"
-                  className="px-4 py-3 text-black bg-white border rounded-sm outline-none"
+                  className="px-4 py-3 text-black bg-white border border-gray-300 rounded-sm outline-none"
                   autoComplete="off"
                   autoFocus="on"
                 />
@@ -99,7 +100,7 @@ function Login() {
               </div>
 
               <div className="relative flex flex-col gap-2">
-                <label className="text-black ">Password</label>
+                <label className="text-black mt-2">Password</label>
 
                 <input
                   type={showpassword ? "text" : "password"}
@@ -107,7 +108,7 @@ function Login() {
                   placeholder="Enter Your password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="px-4 py-3 text-black bg-white border rounded-sm outline-none"
+                  className="px-4 py-3 text-black bg-white border border-gray-300 rounded-sm outline-none"
                   autoComplete="off"
                   autoFocus="off"
                 />
@@ -147,15 +148,7 @@ function Login() {
                   <p className="text-red-500 text-sm">{errors.password}</p>
                 )}
               </div>
-              <div className="flex justify-end my-4">
-                <Link
-                  className="font-semibold hover:text-red-800"
-                  to="/"
-                >
-                  &nbsp;Forgot Password?
-                </Link>
-              </div>
-              <button className="bg-red-500 p-3 text-white">Login</button>
+              <button className="bg-red-500 p-3 mt-8 hover:bg-red-700  text-white">Login</button>
             </form>
           </div>
         </div>
