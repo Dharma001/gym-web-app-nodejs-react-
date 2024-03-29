@@ -137,31 +137,31 @@ const Users = () => {
                   key={user.id}
                   className={index % 2 === 0 ? "bg-purple-50" : "bg-white"}
                 >
-                  <td className="px-6 py-4 whitespace-nowrap text-md">
+                  <td className="px-6 py-4 whitespace-nowrap text-md text-center">
                     {index + 1}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-md">
+                  <td className="px-6 py-4 whitespace-nowrap text-md text-center">
                     {user.memberId}
                   </td>
                   <img
                     src={`${URL}${user.image}`}
                     alt="Service Image"
-                    className="w-[90%] h-[10rem] object-cover object-fit transition-opacity duration-300 rounded-md mb-4"
+                    className=" w-[100px]  mt-4 object-cover object-fit transition-opacity duration-300 rounded-full mb-4"
                     title={user.name}
                   />
-                  <td className="px-6 py-4 whitespace-nowrap text-md">
+                  <td className="px-6 py-4 whitespace-nowrap text-md text-center">
                     {user.name}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-md">
+                  <td className="px-6 py-4 whitespace-nowrap text-md text-center">
                     {user.email}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-md">
+                  <td className="px-6 py-4 whitespace-nowrap text-md text-center">
                     {user.phone}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-md">
+                  <td className="px-6 py-4 whitespace-nowrap text-md text-center">
                     {user.role_name}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-md">
+                  <td className="px-6 py-4 whitespace-nowrap text-md text-center">
                     <button
                       className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-sm transition duration-300 ease-in-out flex items-center"
                       onClick={() => handleDeleteUser(user.id)}

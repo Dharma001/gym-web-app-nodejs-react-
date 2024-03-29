@@ -23,6 +23,8 @@ export const getUsers = async (req, res) => {
         name: user.name,
         email: user.email,
         phone: user.phone,
+        memberId: user.memberId,
+        image: user.image,
         role_id: user.role_id,
         role_name: role ? role.name : null
       };
