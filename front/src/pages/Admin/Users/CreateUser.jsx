@@ -123,7 +123,7 @@ const CreateUser = () => {
           <div>
             <label htmlFor="memberId" className="block">Member ID:</label>
             <input
-              type="text"
+              type="number"
               id="memberId"
               name="memberId"
               placeholder="Enter member ID"
