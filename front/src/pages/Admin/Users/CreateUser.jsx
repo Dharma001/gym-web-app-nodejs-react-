@@ -10,7 +10,6 @@ const CreateUser = () => {
     email: "",
     password: "",
     confPassword: "",
-    role_id: "",
     phone: "",
     memberId: "",
     date_of_birth: "",
@@ -157,23 +156,6 @@ const CreateUser = () => {
               class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
             />
           </div>
-        </div>
-
-        <div>
-          <label htmlFor="roleId" className="block">Role ID:</label>
-          <select
-            id="role_id"
-            name="role_id"
-            value={formData.role_id}
-            onChange={handleChange}
-            required
-            class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
-          >
-            <option value="">Select Role</option>
-            {roles.map((role) => (
-              <option key={role.id} value={role.id}>{role.name}</option>
-            ))}
-          </select>
         </div>
         <div className="mb-4">
           <label htmlFor="image" className="block mb-2">Image:</label>
