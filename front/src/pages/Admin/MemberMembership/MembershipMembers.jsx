@@ -33,7 +33,7 @@ const MembershipMembers = () => {
 
   return (
     <div className="px-4 py-4">
-      <Link to="/admin/CreateMembershipMember" className="bg-blue-500 px-5 py-2 my-6 text-white text-lg rounded-md inline-block"><i className="fas fa-plus"></i> Create Membership</Link>
+      <Link to="/admin/CreateMembershipMember" className="bg-indigo-500 px-5 py-2 my-6 text-white text-lg rounded-md inline-block"><i className="fas fa-plus"></i> Create Membership</Link>
       <h2 className="text-2xl font-bold mb-4">All Membership Members</h2>
       {loading ? (
         <p>Loading...</p>

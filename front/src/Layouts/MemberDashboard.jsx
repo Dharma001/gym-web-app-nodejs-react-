@@ -1,16 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useNavigation,Outlet } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { fetchWithAuth } from '../Auths/api';
 import { toast } from "react-toastify";
 import Cookies from 'js-cookie';
-function MemberDashboard() {
+function GymDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
+  const [notifications, setNotifications] = useState([]);
+  const [error, setError] = useState(null);
+  
   const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await fetchWithAuth('get', 'allNotifications');
+        setNotifications(response.data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
 
   const handleLogout = async () => {
     Cookies.remove('accessToken');
@@ -29,39 +45,52 @@ function MemberDashboard() {
       setIsOpen(false);
     };
   
+    const [isOpenNotification, setIsOpenNotification] = useState(false);
+  
+    const toggleDropdownNotification = () => {
+      setIsOpenNotification(!isOpenNotification);
+    };
+  
+    const closeDropdownNotification = () => {
+      setIsOpenNotification(false);
+    };
+    
   return (
-    <div className="flex h-screen bg-white">
-      {/* Sidebar */}
+    <div className="flex h-[100vh] bg-white">
       <aside
-        className={`w-full md:w-1/2 xl:w-1/6 bg-purple-900 relative p-4 rounded-tr-[10%]  text-white ${
+        className={`w-full md:w-[30%] xl:w-[20%] 2xl:w-[15%] h-full border-gray-300 shadow-lg  border-r relative p-4 ${
           isSidebarOpen ? 'block' : 'hidden'
         }`}
       >
+        <div className="flex justify-center items-center">
+          <img src="../img.png" className="w-[3em]" alt="" />
         <h2
-          className="text-2xl font-bold  my-2
-      text-white  px-3 py-3 "
+          className="text-xl font-bold px-3 py-3 "
         >
-        <i class="fa-solid fa-dumbbell mr-2"></i> Fitness Factory
+   Fitness Factory
         </h2>
-        <div className="border-gray-200 border-b mt-7"></div>
+        </div>
+        <div className="border-gray-500 border-b my-5"></div>
         <div className="mt-4">
         <Link to="dashboard">
-            <p className="text-md my-3 font-medium  hover:text-gray-300 w-full text-white bg-purple-500 px-5 py-3">
+            <p className="text-md my-3 font-medium  w-full text-white  hover:bg-slate-500 bg-gradient-to-br from-purple-500 to-indigo-500 px-5 py-3">
                 <i class="fa-solid fa-house mr-1 text-sm"></i> Dashboard
                 </p>
             </Link>
-          <p className="mt-4 text-gray-500 text-[14px] font-semibold">LAYOUTS & PAGES</p>
+          <p className="mt-4 text-gray-500 text-[13px] font-medium">LAYOUTS & PAGES</p>
           <ul className="w-full">
-              <Link to="users">
-            <li className="text-[16px] my-3 font-light  text-gray-300 w-full  hover:text-white hover:bg-purple-500 px-5 py-3">
-            <i class="fa-regular fa-user mr-1 text-sm"></i> Updates
+          
+              <Link to="Notifications">
+            <li className="text-[16px] my-3 font-light  text-black w-full flex hover:bg-purple-200  px-5 py-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.54em" height="1.5rem" viewBox="0 0 24 24"><path fill="currentColor" d="M7.58 4.08L6.15 2.65C3.75 4.48 2.17 7.3 2.03 10.5h2a8.445 8.445 0 0 1 3.55-6.42m12.39 6.42h2c-.15-3.2-1.73-6.02-4.12-7.85l-1.42 1.43a8.495 8.495 0 0 1 3.54 6.42M18 11c0-3.07-1.64-5.64-4.5-6.32V2.5h-3v2.18C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-6 11c.14 0 .27-.01.4-.04c.65-.14 1.18-.58 1.44-1.18c.1-.24.15-.5.15-.78h-4c.01 1.1.9 2 2.01 2"/></svg>
+            Notifications
                 </li>
               </Link>
           </ul>
         </div>
-        <button onClick={toggleSidebar} className=" left-0 text-white absolute bottom-0 text-[1.3rem] bg-blue-500 w-full py-3">
+        <button onClick={toggleSidebar} className=" left-0 text-white absolute bottom-0 text-[1.3rem] bg-gradient-to-br from-purple-500 to-indigo-500  w-full py-3">
 
-{isSidebarOpen ? <i class="fa-solid fa-arrow-left">Minimize</i> : <i class="fa-solid fa-bars">Maximize</i>}
+{isSidebarOpen ? <i class="fa-solid fa-arrow-left"></i> : <i class="fa-solid fa-bars"></i>}
 </button>
       </aside>
       <div className="flex-1">
@@ -73,6 +102,34 @@ function MemberDashboard() {
               </button>
               <h1 className="text-xl font-semibold">Admin Dashboard</h1>
             </div>
+            <div className="float-right mr-4 ">
+              <div className="grid grid-cols-2 items-center">
+              <div className="relative">
+      <button onClick={toggleDropdownNotification} className="focus:outline-none">
+        <img
+          src="../noti.png"
+          alt="Profile"
+          className="w-16 rounded-full"
+        />
+      </button>
+      {isOpenNotification && (
+        <div className="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg">
+          <div className="py-1">
+            {notifications.length > 0 ? (
+              notifications.map(notification => (
+                <div key={notification.id} className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-2 rounded-sm m-4">
+                  <p className="text-gray-800 font-semibold flex items-center text-md border-b my-2"> <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M6.429 2.413a.75.75 0 0 0-1.13-.986l-1.292 1.48a4.75 4.75 0 0 0-1.17 3.024L2.78 8.65a.75.75 0 0 0 1.5.031l.056-2.718a3.25 3.25 0 0 1 .801-2.069z"/><path fill="currentColor" fill-rule="evenodd" d="M6.237 7.7a4.214 4.214 0 0 1 4.206-3.95H11V3a1 1 0 1 1 2 0v.75h.557a4.214 4.214 0 0 1 4.206 3.95l.221 3.534a7.376 7.376 0 0 0 1.308 3.754a1.617 1.617 0 0 1-1.135 2.529l-3.407.408V19a2.75 2.75 0 1 1-5.5 0v-1.075l-3.407-.409a1.617 1.617 0 0 1-1.135-2.528a7.377 7.377 0 0 0 1.308-3.754zM10.75 19a1.25 1.25 0 0 0 2.5 0v-.75h-2.5z" clip-rule="evenodd"/><path fill="currentColor" d="M17.643 1.355a.75.75 0 0 0-.072 1.058l1.292 1.48a3.25 3.25 0 0 1 .8 2.07l.057 2.717a.75.75 0 1 0 1.5-.031l-.057-2.718a4.75 4.75 0 0 0-1.17-3.024l-1.292-1.48a.75.75 0 0 0-1.058-.072"/></svg> {notification.title}</p>
+                  <p className="text-gray-600 text-md font-medium flex items-center "> <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M21.25 8.18a9.78 9.78 0 0 0-2.16-3.25a10 10 0 0 0-14.15 0a9.76 9.76 0 0 0-2.17 3.25A10 10 0 0 0 2.01 12a9.74 9.74 0 0 0 .74 3.77l-.5 3.65a1.95 1.95 0 0 0 1.29 2.26c.297.098.613.122.92.07l3.65-.54a9.758 9.758 0 0 0 3.88.79a10 10 0 0 0 9.24-13.82zM7.73 13.61a1.61 1.61 0 1 1 .001-3.22a1.61 1.61 0 0 1 0 3.22m4.28 0a1.61 1.61 0 1 1 .001-3.22a1.61 1.61 0 0 1 0 3.22m4.28 0a1.61 1.61 0 1 1 .001-3.22a1.61 1.61 0 0 1 0 3.22"/></svg> {notification.description}</p>
+                  <p className="text-gray-500 text-md flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 36 36"><path fill="currentColor" d="M10 10a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1" class="clr-i-solid--badged clr-i-solid-path-1--badged"/><path fill="currentColor" d="M30 13.5A7.5 7.5 0 0 1 22.5 6H12.2v3a2.2 2.2 0 0 1-4.4 0V6h-4A1.78 1.78 0 0 0 2 7.81v22.38A1.78 1.78 0 0 0 3.75 32h28.5A1.78 1.78 0 0 0 34 30.19V12.34a7.45 7.45 0 0 1-4 1.16M10 26H8v-2h2Zm0-5H8v-2h2Zm0-5H8v-2h2Zm6 10h-2v-2h2Zm0-5h-2v-2h2Zm0-5h-2v-2h2Zm6 10h-2v-2h2Zm0-5h-2v-2h2Zm0-5h-2v-2h2Zm6 10h-2v-2h2Zm0-5h-2v-2h2Zm0-5h-2v-2h2Z" class="clr-i-solid--badged clr-i-solid-path-2--badged"/><circle cx="30" cy="6" r="5" fill="currentColor" class="clr-i-solid--badged clr-i-solid-path-3--badged clr-i-badge"/><path fill="none" d="M0 0h36v36H0z"/></svg> {notification.announcementDate}</p>
+                </div>
+              ))
+            ) : (
+              <p className="px-4 py-2 text-gray-600">No notifications</p>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
             <div className="relative">
       <button onClick={toggleDropdown} className="focus:outline-none">
         <img
@@ -92,9 +149,12 @@ function MemberDashboard() {
         </div>
       )}
     </div>
+              </div>
+
+            </div>
           </div>
         </header>
-        <main>
+        <main class="mx-8">
         <Outlet/>
         </main>
           </div>
@@ -103,4 +163,4 @@ function MemberDashboard() {
   );
 }
 
-export default MemberDashboard;
+export default GymDashboard;
