@@ -31,7 +31,9 @@ const Users = () => {
         (user.email &&
           user.email.toLowerCase().includes(searchQuery.toLowerCase())) ||
         (user.phone &&
-          user.phone.toLowerCase().includes(searchQuery.toLowerCase()))
+          user.phone.toLowerCase().includes(searchQuery.toLowerCase())) ||
+          (user.memberId &&
+            user.memberId.toLowerCase().includes(searchQuery.toLowerCase()))
     );
     setFilteredUsers(filteredResults);
   }, [searchQuery, users]);
