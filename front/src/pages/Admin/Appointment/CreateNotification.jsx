@@ -41,10 +41,11 @@ const CreateAppointment = () => {
   };
 
   return (
-    <div className="container mx-auto px-5 xl:w-4/5 my-6">
+    <div className="container mx-auto px-5 xl:w-5/5 my-6">
       <h2 className="text-2xl font-bold mb-4">Create Appointment</h2>
       {error && <p className="text-red-500">Error: {error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="grid grid-col-1 md:grid-cols-2 gap-7">
         <div>
           <label htmlFor="first_name" className="block">First Name:</label>
           <input
@@ -55,10 +56,9 @@ const CreateAppointment = () => {
             value={formData.first_name}
             onChange={handleChange}
             required
-            className="border rounded-md px-6 py-2"
+         class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
-
         <div>
           <label htmlFor="last_name" className="block">Last Name:</label>
           <input
@@ -69,10 +69,11 @@ const CreateAppointment = () => {
             value={formData.last_name}
             onChange={handleChange}
             required
-            className="border rounded-md px-6 py-2"
+         class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
-
+</div>
+<div className="grid grid-col-1 md:grid-cols-2 gap-7">
         <div>
           <label htmlFor="email" className="block">Email:</label>
           <input
@@ -83,7 +84,7 @@ const CreateAppointment = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="border rounded-md px-6 py-2"
+         class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
 
@@ -96,10 +97,10 @@ const CreateAppointment = () => {
             value={formData.appointment_date}
             onChange={handleChange}
             required
-            className="border rounded-md px-6 py-2"
+         class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
-
+</div>
         <div>
           <label htmlFor="appointment_time" className="block">Appointment Time:</label>
           <input
@@ -109,11 +110,11 @@ const CreateAppointment = () => {
             value={formData.appointment_time}
             onChange={handleChange}
             required
-            className="border rounded-md px-6 py-2"
+         class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
 
-        <button type="submit" className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Create Appointment</button>
+        <button type="submit" className="bg-indigo-500 text-white px-4 py-3 float-right rounded-sm hover:bg-blue-600">Create Appointment</button>
       </form>
     </div>
   );

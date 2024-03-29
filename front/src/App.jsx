@@ -20,6 +20,11 @@ import CreateAppointment from "./pages/Admin/Appointment/CreateNotification";
 import Appointments from "./pages/Admin/Appointment/Appointments";
 import Surveys from "./pages/Admin/Survey/Survey";
 import CreateSurvey from "./pages/Admin/Survey/CreateSurvey";
+import MemberMemberships from "./pages/Admin/MemberMembership/MemberMemberships";
+import PendingAmount from "./pages/Admin/Dashboard/PendingAmount";
+import PaidMembers from "./pages/Admin/Dashboard/PaidMembers";
+import ExpiredMembers from "./pages/Admin/Dashboard/ExpiredMembers";
+import ExpringMembers from "./pages/Admin/Dashboard/ExpringMembers";
 
 function isAuthenticated() {
   const accessToken = Cookies.get("accessToken");
@@ -203,11 +208,66 @@ function App() {
               />
             }
           />
+                    <Route
+            path="userMembership/:user_id"
+            element={
+              <PrivateAdminRoute
+                element={<MemberMemberships />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
           <Route
             path="users"
             element={
               <PrivateAdminRoute
                 element={<Users />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+                    <Route
+            path="pendingAmount"
+            element={
+              <PrivateAdminRoute
+                element={<PendingAmount />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+                              <Route
+            path="paidAmount"
+            element={
+              <PrivateAdminRoute
+                element={<PaidMembers />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+                                        <Route
+            path="expiredMembers"
+            element={
+              <PrivateAdminRoute
+                element={<ExpiredMembers />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+                                        <Route
+            path="expiringMembers"
+            element={
+              <PrivateAdminRoute
+                element={<ExpringMembers />}
                 authenticated={isAuthenticated()}
                 isAdmin={isAdmin()}
                 redirectTo="/login"

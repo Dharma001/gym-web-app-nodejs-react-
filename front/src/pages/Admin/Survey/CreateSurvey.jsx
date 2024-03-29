@@ -38,7 +38,7 @@ const CreateSurvey = () => {
   };
 
   return (
-    <div className="container mx-auto px-5 xl:w-4/5 my-6">
+    <div className="container mx-auto px-5 xl:w-5/5 my-6">
       <h2 className="text-2xl font-bold mb-4">Create Survey</h2>
       {error && <p className="text-red-500">Error: {error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -52,7 +52,7 @@ const CreateSurvey = () => {
             value={formData.title}
             onChange={handleChange}
             required
-            className="border rounded-md px-6 py-2"
+            class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
 
@@ -64,7 +64,7 @@ const CreateSurvey = () => {
             placeholder="Enter survey description"
             value={formData.description}
             onChange={handleChange}
-            className="border rounded-md px-6 py-2"
+            class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
 
@@ -78,7 +78,7 @@ const CreateSurvey = () => {
             value={formData.url}
             onChange={handleChange}
             required
-            className="border rounded-md px-6 py-2"
+            class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
 

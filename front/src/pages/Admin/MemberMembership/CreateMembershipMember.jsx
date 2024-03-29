@@ -58,6 +58,7 @@ const CreateMembershipMember = () => {
       <h2 className="text-2xl font-bold mb-4">Create Membership Member</h2>
       {error && <p className="text-red-500">Error: {error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="grid grid-col-1 md:grid-cols-2 gap-7">
         <div>
           <label htmlFor="user_id" className="block">User:</label>
           <select
@@ -66,7 +67,7 @@ const CreateMembershipMember = () => {
             value={formData.user_id}
             onChange={handleChange}
             required
-            className="border rounded-md px-6 py-2"
+         class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           >
             <option value="">Select User</option>
             {users.map(user => (
@@ -82,7 +83,7 @@ const CreateMembershipMember = () => {
             value={formData.membership_id}
             onChange={handleChange}
             required
-            className="border rounded-md px-6 py-2"
+         class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           >
             <option value="">Select Membership</option>
             {memberships.map(membership => (
@@ -90,6 +91,8 @@ const CreateMembershipMember = () => {
             ))}
           </select>
         </div>
+        </div>
+      <div className="grid grid-col-1 md:grid-cols-2 gap-7 ">
         <div>
           <label htmlFor="start_date" className="block">Start Date:</label>
           <input
@@ -99,7 +102,7 @@ const CreateMembershipMember = () => {
             value={formData.start_date}
             onChange={handleChange}
             required
-            className="border rounded-md px-6 py-2"
+         class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
         <div>
@@ -111,10 +114,11 @@ const CreateMembershipMember = () => {
             value={formData.pay_amount}
             onChange={handleChange}
             required
-            className="border rounded-md px-6 py-2"
+         class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Create Membership Member</button>
+        </div>
+        <button type="submit" className="bg-indigo-500 text-white px-4 py-3 float-right rounded-sm hover:bg-indigo-600">Create Membership Member</button>
       </form>
     </div>
   );

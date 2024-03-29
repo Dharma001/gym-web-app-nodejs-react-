@@ -82,28 +82,3 @@ export const Login = async (req, res) => {
   }
 };
 
-
-export const searchUsers = async (req, res) => {
-  try {
-    // Extract the search term from the query parameters
-    const searchTerm = req.query.search;
-
-    // Fetch users based on the search term
-    const users = await Users.findAll({
-      where: {
-        [Op.or]: [
-          { name: { [Op.iLike]: `%${searchTerm}%` } }, // Case-insensitive search by name
-          { email: { [Op.iLike]: `%${searchTerm}%` } } // Case-insensitive search by email
-        ]
-      }
-    });
-
-    // Send the users as a JSON response
-    res.json(users);
-  } catch (error) {
-    // If an error occurs, send a 500 status code along with an error message
-    console.error('Error searching users:', error);
-    res.status(500).json({ message: 'Failed to search users' });
-  }
-};
-

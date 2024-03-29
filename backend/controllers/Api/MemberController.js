@@ -1,4 +1,6 @@
+import MembershipMember from '../../models/MembershipMember.js';
 import Users from "../../models/User.js";
+import Membership from '../../models/Membership.js';
 import bcrypt from "bcrypt";
 
 export const CreateUser = async (req, res) => {
@@ -57,3 +59,44 @@ export const deleteUsersById = async (req, res) => {
     return res.status(500).json({ message: 'Failed to delete Users' });
   }
 };
+
+
+export const createUsersMembership = async (req, res) => {
+  try {
+    const userId = req.params.user_id;
+    const { membership_id, start_date, pay_amount ,discount } = req.body;
+
+    if (!membership_id || !start_date || !pay_amount) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    const membership = await Membership.findByPk(membership_id);
+    if (!membership) {
+      return res.status(404).json({ message: 'Membership not found' });
+    }
+
+    const totalAmount = membership.price - discount; 
+
+    const status = pay_amount < totalAmount ? 'pending' : 'paid';
+
+    const durationInDays = membership.duration;
+    const end_date = new Date(start_date);
+    end_date.setDate(end_date.getDate() + durationInDays);
+
+    const membershipMember = await MembershipMember.create({
+      user_id: userId,
+      start_date,
+      end_date,
+      membership_id,
+      pay_amount,
+      discount,
+      status
+    });
+
+    res.status(201).json({ message: 'Membership member created successfully', membershipMember });
+  } catch (error) {
+    console.error('Error creating membership member:', error);
+    res.status(500).json({ message: 'Failed to create membership member' });
+  }
+};
+

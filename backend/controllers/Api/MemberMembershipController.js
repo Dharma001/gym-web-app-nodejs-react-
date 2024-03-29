@@ -1,28 +1,32 @@
 import MembershipMember from '../../models/MembershipMember.js';
-import User from '../../models/User.js'
+import User from '../../models/User.js';
 import Membership from '../../models/Membership.js';
+
 export const createMembershipMember = async (req, res) => {
   try {
-    const { user_id, membership_id, start_date, pay_amount } = req.body;
+    const { user_id, membership_id, start_date, pay_amount, discount } = req.body;
     const membership = await Membership.findByPk(membership_id);
 
     if (!membership) {
       return res.status(404).json({ message: 'Membership not found' });
     }
 
+    const totalAmount = membership.price + discount;
+
+    const status = pay_amount <= totalAmount ? 'pending' : 'paid';
+
     const durationInDays = membership.duration;
     const end_date = new Date(start_date);
     end_date.setDate(end_date.getDate() + durationInDays);
 
-    const due_amount = membership.price - pay_amount;
-
     const membershipMember = await MembershipMember.create({
-      user_id, 
+      user_id,
       start_date,
       end_date,
       membership_id,
       pay_amount,
-      due_amount
+      discount,
+      status
     });
 
     res.status(201).json({ message: 'Membership member created successfully', membershipMember });
@@ -32,13 +36,15 @@ export const createMembershipMember = async (req, res) => {
   }
 };
 
+
 export const getAllMembershipMembers = async (req, res) => {
   try {
     const membershipMembers = await MembershipMember.findAll({
       include: [
-        { model: User, attributes: ['id', 'name'] },
-        { model: Membership, attributes: ['id', 'name'] }
-      ]
+        { model: User, attributes: ['id', 'name','phone','memberId' ,'email'] },
+        { model: Membership, attributes: ['id', 'name', 'price', 'duration'] }
+      ],
+      order: [['createdAt', 'DESC']]
     });
 
     res.json(membershipMembers);
@@ -78,9 +84,9 @@ export const updateMembershipMemberById = async (req, res) => {
       return res.status(404).json({ message: 'Membership member not found' });
     }
 
-    const due_amount = membershipMember.Membership.price - pay_amount;
+    const discount = membershipMember.Membership.price - pay_amount;
 
-    await membershipMember.update({ pay_amount, due_amount });
+    await membershipMember.update({ pay_amount, discount });
 
     res.json({ message: 'Membership member updated successfully', membershipMember });
   } catch (error) {

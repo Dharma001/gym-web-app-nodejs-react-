@@ -51,10 +51,11 @@ const CreateMembership = () => {
   };
 
   return (
-    <div className="container mx-auto px-5 xl:w-4/5 my-6">
+    <div className="container mx-auto px-5 xl:w-5/5 my-6">
       <h2 className="text-2xl font-bold mb-4">Create Membership</h2>
       {error && <p className="text-red-500">Error: {error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="grid grid-col-1 md:grid-cols-2 gap-7 ">
         <div>
           <label htmlFor="name" className="block">Name:</label>
           <input
@@ -65,7 +66,7 @@ const CreateMembership = () => {
             value={formData.name}
             onChange={handleChange}
             required
-            className="border rounded-md px-6 py-2"
+            class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
 
@@ -77,10 +78,11 @@ const CreateMembership = () => {
             placeholder="Enter membership description"
             value={formData.description}
             onChange={handleChange}
-            className="border rounded-md px-6 py-2"
+            class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
-
+</div>
+<div className="grid grid-col-1 md:grid-cols-2 gap-7 ">
         <div>
           <label htmlFor="duration" className="block">Duration:</label>
           <input
@@ -90,7 +92,7 @@ const CreateMembership = () => {
             placeholder="Enter membership duration"
             value={formData.duration}
             onChange={handleChange}
-            className="border rounded-md px-6 py-2"
+            class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
 
@@ -103,21 +105,21 @@ const CreateMembership = () => {
             placeholder="Enter membership price"
             value={formData.price}
             onChange={handleChange}
-            className="border rounded-md px-6 py-2"
+            class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
-
+</div>
         <div className="mb-4">
           <label htmlFor="image" className="block mb-2">Image:</label>
           <input
             type="file"
             name="image"
             onChange={handleChange}
-            className="border-gray-300 rounded-md p-2 w-full"
+            class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
 
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Create Membership</button>
+        <button type="submit" className="bg-indigo-500 text-white float-right px-4 py-3 rounded-sm hover:bg-indigo-600">Create Membership</button>
       </form>
     </div>
   );

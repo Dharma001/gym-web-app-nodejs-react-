@@ -70,7 +70,7 @@ function Login() {
     <Nav/>
       <div className="w-full h-full my-[8rem]">
         <div className="flex items-center justify-center">
-          <div className="flex flex-col gap-3 px-[40px] w-full xl:w-[25%] border border-gray-300 py-[30px]">
+          <div className="flex flex-col gap-3 px-[40px] w-full lg:w-[30%] border border-gray-300 py-[30px]">
             <p className="font-bold text-2xl">Login</p>
             <div className="flex ml-[-5px]">
               <img src="./img.png" className="w-14" alt="" />   

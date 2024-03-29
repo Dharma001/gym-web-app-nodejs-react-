@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchWithAuth } from '../../../Auths/api';
 import { Link } from 'react-router-dom';
 
-const MembershipMembers = () => {
+const  ExpringMembers = () => {
   const [membershipMembers, setMembershipMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ const MembershipMembers = () => {
   useEffect(() => {
     const fetchMembershipMembers = async () => {
       try {
-        const response = await fetchWithAuth('get', 'memberMemberships');
+        const response = await fetchWithAuth('get', 'expiringMembers');
         setMembershipMembers(response.data);
         setLoading(false);
       } catch (error) {
@@ -207,4 +207,4 @@ const MembershipMembers = () => {
   );
 };
 
-export default MembershipMembers;
+export default  ExpringMembers;
