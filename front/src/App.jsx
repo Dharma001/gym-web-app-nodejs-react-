@@ -20,6 +20,17 @@ import CreateAppointment from "./pages/Admin/Appointment/CreateNotification";
 import Appointments from "./pages/Admin/Appointment/Appointments";
 import Surveys from "./pages/Admin/Survey/Survey";
 import CreateSurvey from "./pages/Admin/Survey/CreateSurvey";
+import MemberMemberships from "./pages/Admin/MemberMembership/MemberMemberships";
+import PendingAmount from "./pages/Admin/Dashboard/PendingAmount";
+import PaidMembers from "./pages/Admin/Dashboard/PaidMembers";
+import ExpiredMembers from "./pages/Admin/Dashboard/ExpiredMembers";
+import ExpringMembers from "./pages/Admin/Dashboard/ExpringMembers";
+import Notify from "./pages/Members/Notifications/Notify";
+import Survey from "./pages/Members/Survey/Survey";
+import EditUser from "./pages/Admin/Users/EditUser";
+import Profile from "./pages/Admin/Users/Profile";
+import MemberProfile from "./pages/Members/MemberProfile";
+import MemberAppointments from "./pages/Members/Appointment/MemberAppointments";
 
 function isAuthenticated() {
   const accessToken = Cookies.get("accessToken");
@@ -32,8 +43,9 @@ function isAdmin() {
 }
 function isMember() {
   const roleId = Cookies.get("roleId");
-  return roleId === "2"; 
+  return roleId === "2";
 }
+
 function PrivateMemberRoute({ element, authenticated, redirectTo }) {
   return authenticated && isMember() ? element : <Navigate to={redirectTo} />;
 }
@@ -56,7 +68,7 @@ function App() {
             <PrivateRoute
               element={<Login />}
               authenticated={!isAuthenticated()}
-              redirectTo="/dashboard"
+              redirectTo="/admin"
             />
           }
         />
@@ -83,6 +95,28 @@ function App() {
             }
           />
                     <Route
+            path="editUser/:id"
+            element={
+              <PrivateAdminRoute
+                element={<EditUser />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+                              <Route
+            path="profile/:id"
+            element={
+              <PrivateAdminRoute
+                element={<Profile />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+          <Route
             path="createNotification"
             element={
               <PrivateAdminRoute
@@ -115,7 +149,7 @@ function App() {
               />
             }
           />
-                    <Route
+          <Route
             path="MembershipMembers"
             element={
               <PrivateAdminRoute
@@ -126,7 +160,7 @@ function App() {
               />
             }
           />
-                              <Route
+          <Route
             path="Notifications"
             element={
               <PrivateAdminRoute
@@ -137,7 +171,7 @@ function App() {
               />
             }
           />
-                                        <Route
+          <Route
             path="appointments"
             element={
               <PrivateAdminRoute
@@ -148,7 +182,7 @@ function App() {
               />
             }
           />
-                                                  <Route
+          <Route
             path="surveys"
             element={
               <PrivateAdminRoute
@@ -170,7 +204,7 @@ function App() {
               />
             }
           />
-                    <Route
+          <Route
             path="createAppointment"
             element={
               <PrivateAdminRoute
@@ -181,7 +215,7 @@ function App() {
               />
             }
           />
-                              <Route
+          <Route
             path="createSurvey"
             element={
               <PrivateAdminRoute
@@ -204,6 +238,17 @@ function App() {
             }
           />
           <Route
+            path="userMembership/:user_id"
+            element={
+              <PrivateAdminRoute
+                element={<MemberMemberships />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+          <Route
             path="users"
             element={
               <PrivateAdminRoute
@@ -214,7 +259,51 @@ function App() {
               />
             }
           />
-                    <Route
+          <Route
+            path="pendingAmount"
+            element={
+              <PrivateAdminRoute
+                element={<PendingAmount />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+          <Route
+            path="paidAmount"
+            element={
+              <PrivateAdminRoute
+                element={<PaidMembers />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+          <Route
+            path="expiredMembers"
+            element={
+              <PrivateAdminRoute
+                element={<ExpiredMembers />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+          <Route
+            path="expiringMembers"
+            element={
+              <PrivateAdminRoute
+                element={<ExpringMembers />}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+          <Route
             path="contacts"
             element={
               <PrivateAdminRoute
@@ -238,17 +327,72 @@ function App() {
           />
         </Route>
         <Route
-  path="/member"
-  element={
-    <PrivateMemberRoute
-      element={<MemberDashboard />}
-      authenticated={isAuthenticated()}
-      isMember={isMember()}
-      redirectTo="/login"
-    />
-  }
->
-</Route>
+          path="/member"
+          element={
+            <PrivateMemberRoute
+              element={<MemberDashboard />}
+              authenticated={isAuthenticated()}
+              isMember={isMember()}
+              redirectTo="/login"
+            />
+          }
+        >
+                  <Route
+            path="notify"
+            element={
+              <PrivateMemberRoute
+                element={<Notify />}
+                authenticated={isAuthenticated()}
+                isMember={isMember()}
+                redirectTo="/login"
+              />
+            }
+          />
+                            <Route
+            path="survey"
+            element={
+              <PrivateMemberRoute
+                element={<Survey />}
+                authenticated={isAuthenticated()}
+                isMember={isMember()}
+                redirectTo="/login"
+              />
+            }
+          />
+                                        <Route
+            path="memberProfile/:id"
+            element={
+              <PrivateMemberRoute
+                element={<MemberProfile />}
+                authenticated={isAuthenticated()}
+                isMember={isMember()}
+                redirectTo="/login"
+              />
+            }
+          />
+                              <Route
+            path="memberAppointment"
+            element={
+              <PrivateMemberRoute
+                element={<MemberAppointments />}
+                authenticated={isAuthenticated()}
+                isAdmin={isMember()}
+                redirectTo="/login"
+              />
+            }
+          />
+                    <Route
+            path="createAppointment"
+            element={
+              <PrivateMemberRoute
+                element={<CreateAppointment />}
+                authenticated={isAuthenticated()}
+                isAdmin={isMember()}
+                redirectTo="/login"
+              />
+            }
+          />
+        </Route>
       </Routes>
     </>
   );

@@ -18,7 +18,6 @@ const MembershipMember = db.define('membership_members', {
   membership_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-
   },
   start_date: {
     type: DataTypes.DATE,
@@ -33,10 +32,15 @@ const MembershipMember = db.define('membership_members', {
     allowNull: false,
     defaultValue: 0
   },
-  due_amount: {
+  discount: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
     defaultValue: 0
+  },
+  status: {
+    type: DataTypes.ENUM('pending', 'paid'),
+    allowNull: false,
+    defaultValue: 'pending'
   },
   created_at: {
     type: DataTypes.DATE,
@@ -52,6 +56,7 @@ const MembershipMember = db.define('membership_members', {
   timestamps: true,
   underscored: true
 });
+
 MembershipMember.belongsTo(Users, { foreignKey: 'user_id' });
 MembershipMember.belongsTo(Membership, { foreignKey: 'membership_id' }); 
 

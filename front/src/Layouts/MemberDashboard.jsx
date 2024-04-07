@@ -44,7 +44,8 @@ function GymDashboard() {
     const closeDropdown = () => {
       setIsOpen(false);
     };
-  
+    const user_id = Cookies.get("userId");
+
     const [isOpenNotification, setIsOpenNotification] = useState(false);
   
     const toggleDropdownNotification = () => {
@@ -72,7 +73,7 @@ function GymDashboard() {
         </div>
         <div className="border-gray-500 border-b my-5"></div>
         <div className="mt-4">
-        <Link to="dashboard">
+        <Link to="/member">
             <p className="text-md my-3 font-medium  w-full text-white  hover:bg-slate-500 bg-gradient-to-br from-purple-500 to-indigo-500 px-5 py-3">
                 <i class="fa-solid fa-house mr-1 text-sm"></i> Dashboard
                 </p>
@@ -80,25 +81,33 @@ function GymDashboard() {
           <p className="mt-4 text-gray-500 text-[13px] font-medium">LAYOUTS & PAGES</p>
           <ul className="w-full">
           
-              <Link to="Notifications">
+              <Link to="notify">
             <li className="text-[16px] my-3 font-light  text-black w-full flex hover:bg-purple-200  px-5 py-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.54em" height="1.5rem" viewBox="0 0 24 24"><path fill="currentColor" d="M7.58 4.08L6.15 2.65C3.75 4.48 2.17 7.3 2.03 10.5h2a8.445 8.445 0 0 1 3.55-6.42m12.39 6.42h2c-.15-3.2-1.73-6.02-4.12-7.85l-1.42 1.43a8.495 8.495 0 0 1 3.54 6.42M18 11c0-3.07-1.64-5.64-4.5-6.32V2.5h-3v2.18C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-6 11c.14 0 .27-.01.4-.04c.65-.14 1.18-.58 1.44-1.18c.1-.24.15-.5.15-.78h-4c.01 1.1.9 2 2.01 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.54em" height="1.5rem" className="mr-2" viewBox="0 0 24 24"><path fill="currentColor" d="M7.58 4.08L6.15 2.65C3.75 4.48 2.17 7.3 2.03 10.5h2a8.445 8.445 0 0 1 3.55-6.42m12.39 6.42h2c-.15-3.2-1.73-6.02-4.12-7.85l-1.42 1.43a8.495 8.495 0 0 1 3.54 6.42M18 11c0-3.07-1.64-5.64-4.5-6.32V2.5h-3v2.18C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-6 11c.14 0 .27-.01.4-.04c.65-.14 1.18-.58 1.44-1.18c.1-.24.15-.5.15-.78h-4c.01 1.1.9 2 2.01 2"/></svg>
             Notifications
+                </li>
+              </Link>
+              <Link to="survey">
+            <li className="text-[16px] my-3 font-light  text-black w-full flex hover:bg-purple-200  px-5 py-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.54em" height="1.5rem" className="mr-2" viewBox="0 0 26 26"><path fill="currentColor" d="M8.813 0A1 1 0 0 0 8 1v1H4.406C3.606 2 3 2.606 3 3.406V24.5c0 .9.606 1.5 1.406 1.5H21.5c.8 0 1.406-.606 1.406-1.406V3.406c.1-.8-.512-1.406-1.312-1.406H18V1a1 1 0 0 0-1-1H9a1 1 0 0 0-.094 0a1 1 0 0 0-.094 0zM10 2h6v2h-6zM5 4h3v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4h3v20H5zm2 5v4h4V9zm1 1h2v2H8zm5 0v2h6v-2zm-6 5v4h4v-4zm6 1v2h6v-2z"/></svg>
+            Surveys
+                </li>
+              </Link>
+              
+              <Link to="memberAppointment">
+            <li className="text-[16px] my-3 font-light  text-black w-full flex hover:bg-purple-200  px-5 py-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.54em" height="1.5rem" className="mr-2"  viewBox="0 0 15 15"><path fill="currentColor" fill-rule="evenodd" d="M12 2h1.5A1.5 1.5 0 0 1 15 3.5v10a1.5 1.5 0 0 1-1.5 1.5h-12A1.5 1.5 0 0 1 0 13.5v-10A1.5 1.5 0 0 1 1.5 2H3V0h1v2h7V0h1zM6 8H3V7h3zm6-1H9v1h3zm-6 4H3v-1h3zm3 0h3v-1H9z" clip-rule="evenodd"/></svg>             Appointments
                 </li>
               </Link>
           </ul>
         </div>
-        <button onClick={toggleSidebar} className=" left-0 text-white absolute bottom-0 text-[1.3rem] bg-gradient-to-br from-purple-500 to-indigo-500  w-full py-3">
-
-{isSidebarOpen ? <i class="fa-solid fa-arrow-left"></i> : <i class="fa-solid fa-bars"></i>}
-</button>
       </aside>
       <div className="flex-1">
         <header className="bg-white p-4 text-white">
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <button onClick={toggleSidebar} className="mr-4 text-[1.8rem] text-black">
-                {isSidebarOpen ? <i class="fa-solid fa-arrow-left"></i> : <FaBars />}
+              {<FaBars />}
               </button>
               <h1 className="text-xl font-semibold">Admin Dashboard</h1>
             </div>
@@ -143,9 +152,10 @@ function GymDashboard() {
           className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg"
           onClick={closeDropdown}
         >
-          <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Dashboard</a>
-          <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Edit Profile</a>
-          <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200"onClick={handleLogout}>Log Out</a>
+          <Link to={`/member/memberProfile/${user_id}`} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                      <i className="fa-regular fa-pen-to-square"></i> Your Profile
+                    </Link>
+          <a href="#" className="px-4 py-2 text-gray-800 flex items-center hover:bg-gray-200"onClick={handleLogout}><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h6q.425 0 .713.288T12 4q0 .425-.288.713T11 5H5v14h6q.425 0 .713.288T12 20q0 .425-.288.713T11 21zm12.175-8H10q-.425 0-.712-.288T9 12q0-.425.288-.712T10 11h7.175L15.3 9.125q-.275-.275-.275-.675t.275-.7q.275-.3.7-.313t.725.288L20.3 11.3q.3.3.3.7t-.3.7l-3.575 3.575q-.3.3-.712.288t-.713-.313q-.275-.3-.262-.712t.287-.688z"/></svg> Log Out</a>
         </div>
       )}
     </div>
@@ -154,7 +164,7 @@ function GymDashboard() {
             </div>
           </div>
         </header>
-        <main class="mx-8">
+       <main className="mx-8 overflow-y-auto h-[80%]">
         <Outlet/>
         </main>
           </div>

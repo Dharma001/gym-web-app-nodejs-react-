@@ -53,3 +53,19 @@ export const deleteMembershipById = async (req, res) => {
     return res.status(500).json({ message: 'Failed to delete membership' });
   }
 };
+export const getMembershipById = async (req, res) => {
+  const { membershipId } = req.params;
+
+  try {
+    const membership = await Membership.findByPk(membershipId);
+
+    if (!membership) {
+      return res.status(404).json({ message: 'Membership not found' });
+    }
+
+    res.status(200).json({ membership });
+  } catch (error) {
+    console.error('Error fetching membership:', error);
+    res.status(500).json({ message: 'Failed to fetch membership' });
+  }
+};

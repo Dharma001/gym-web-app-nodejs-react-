@@ -58,7 +58,7 @@ const MembershipMembers = () => {
       );
       if (response.status === 200) {
         toast.success("Member Membership Payment Updated Successfully");
-        navigate("/admin/MembershipMembers")
+        navigate("/admin/pendingAmount")
         togglePaymentModal();
       } else {
         const errorData = await response.json();
@@ -72,7 +72,7 @@ const MembershipMembers = () => {
   useEffect(() => {
     const fetchMembershipMembers = async () => {
       try {
-        const response = await fetchWithAuth("get", "memberMemberships");
+        const response = await fetchWithAuth("get", "pendingMemberMemberships");
         setMembershipMembers(response.data);
         setLoading(false);
       } catch (error) {
@@ -282,7 +282,7 @@ const MembershipMembers = () => {
                       <td>
                         {isOpen && (
                           <div className="fixed z-10 inset-0 overflow-y-auto ">
-                            <div className="flex items-center justify-center min-h-screen bg-slate-900 opacity-50">
+                            <div className="flex items-center justify-center min-h-screen bg-slate-900 opacity-70">
                               <div className="relative bg-white  p-12 rounded-md max-w-lg mx-auto">
                                 <div className="flex justify-between items-center">
                                   <h2 className="text-lg font-semibold">
@@ -337,7 +337,7 @@ const MembershipMembers = () => {
                       <td>
                         {isPaymentOpen && (
                           <div className="fixed z-10 inset-0 overflow-y-auto ">
-                            <div className="flex items-center justify-center min-h-screen bg-slate-900 opacity-50">
+                            <div className="flex items-center justify-center min-h-screen bg-slate-900 opacity-60">
                               <div className="relative bg-white  w-[80%] px-4 py-6 rounded-md max-w-lg mx-auto">
                                 <div className="flex justify-between items-center">
                                   <h2 className="text-lg font-bold flex items-center">

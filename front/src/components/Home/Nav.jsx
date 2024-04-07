@@ -37,7 +37,7 @@ function Nav() {
           <div className="px-4 py-2 md:flex md:justify-between md:items-center">
             <div className="flex justify-between items-center ">
               <a href="#" className=" flex justify-center text-[1.2rem] font-semibold items-center relative">
-                <img src="./img.png" className="w-[3rem] " alt="" /> Fitnees Factory
+                <img src="./img.png" className="w-[3rem] " alt="" /> Fitness Factory
               </a>
               <button
                 onClick={toggleMenu}

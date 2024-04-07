@@ -2,9 +2,10 @@ import PersonalTrainerAppointment from '../../models/PersonalTrainerAppointment.
 
 export const createAppointment = async (req, res) => {
     try {
-        const { first_name, last_name, email, appointment_date, appointment_time } = req.body;
+        const { user_id , first_name, last_name, email, appointment_date, appointment_time } = req.body;
 
         const appointment = await PersonalTrainerAppointment.create({
+            user_id,
             first_name,
             last_name,
             email,
@@ -28,6 +29,26 @@ export const getAllAppointments = async (req, res) => {
     }
   };
   
+  export const getAllUserAppointments = async (req, res) => {
+    const { userId } = req.params; 
+
+    try {
+        let appointments;
+
+        if (userId) {
+            appointments = await PersonalTrainerAppointment.findAll({
+                where: { user_id: userId }
+            });
+        } else {
+            appointments = await PersonalTrainerAppointment.findAll();
+        }
+
+        res.json(appointments);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ message: "Failed to fetch appointments" });
+    }
+};
 
 export const getAppointmentById = async (req, res) => {
     try {
@@ -46,7 +67,7 @@ export const getAppointmentById = async (req, res) => {
 export const updateAppointmentById = async (req, res) => {
     try {
         const { id } = req.params;
-        const { first_name, last_name, email, appointment_date, appointment_time } = req.body;
+        const { user_id,first_name, last_name, email, appointment_date, appointment_time } = req.body;
         const appointment = await PersonalTrainerAppointment.findByPk(id);
 
         if (!appointment) {
@@ -54,6 +75,7 @@ export const updateAppointmentById = async (req, res) => {
         }
 
         await appointment.update({
+            user_id,
             first_name,
             last_name,
             email,
