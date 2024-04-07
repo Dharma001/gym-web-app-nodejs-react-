@@ -50,10 +50,9 @@ export const updateMembershipMemberPayment = async (req, res) => {
     const membership = await Membership.findByPk(membershipMember.membership_id);
     
     const oldPayAmount = membershipMember.pay_amount;
-
-    const totalAmount = pay_amount + membershipMember.discount;
-    const status = totalAmount <= membership.price ? 'pending' : 'paid';
     const pay_new = parseFloat(oldPayAmount) + parseFloat(pay_amount)
+    const totalAmount = pay_new + membershipMember.discount;
+    const status = totalAmount <= membership.price ? 'pending' : 'paid';
     membershipMember.pay_amount = parseFloat(pay_new);
     membershipMember.status = status;
     
@@ -118,8 +117,10 @@ export const updateMembershipMemberById = async (req, res) => {
     }
 
     const discount = membershipMember.Membership.price - pay_amount;
+    const totalAmount = pay_amount + discount;
+    const status = totalAmount <= membershipMember.Membership.price ? 'pending' : 'paid';
 
-    await membershipMember.update({ pay_amount, discount });
+    await membershipMember.update({ pay_amount, discount, status });
 
     res.json({ message: 'Membership member updated successfully', membershipMember });
   } catch (error) {
@@ -127,6 +128,8 @@ export const updateMembershipMemberById = async (req, res) => {
     res.status(500).json({ message: 'Failed to update membership member' });
   }
 };
+
+
 
 export const deleteMembershipMemberById = async (req, res) => {
   const { id } = req.params;

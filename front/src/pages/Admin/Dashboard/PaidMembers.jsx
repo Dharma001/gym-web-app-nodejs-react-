@@ -26,36 +26,7 @@ const MembershipMembers = () => {
   };
 
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    pay_amount: "",
-  });
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetchWithAuth(
-        "patch",
-        `membershipMembers/${selectedMemberId}/payment`,
-        formData
-      );
-      if (response.status === 200) {
-        toast.success("Member Membership Payment Updated Successfully");
-        navigate("/admin/MembershipMembers")
-        togglePaymentModal();
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message);
-      }
-    } catch (error) {
-      setError(error.message);
-    }
-  };
 
   useEffect(() => {
     const fetchMembershipMembers = async () => {
@@ -260,12 +231,6 @@ const MembershipMembers = () => {
                             />
                           </svg>
                         </button>
-                        <button
-                          onClick={() => togglePaymentModal(member.id)}
-                          className="bg-black mt-2 hover:bg-indigo-500 text-white px-3 py-2 rounded-sm transition duration-300 ease-in-out flex items-center"
-                        >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" d="M3 20q-.825 0-1.412-.587T1 18V8q0-.425.288-.712T2 7q.425 0 .713.288T3 8v10h16q.425 0 .713.288T20 19q0 .425-.288.713T19 20zm4-4q-.825 0-1.412-.587T5 14V6q0-.825.588-1.412T7 4h14q.825 0 1.413.588T23 6v8q0 .825-.587 1.413T21 16zm2-2q0-.825-.587-1.412T7 12v2zm10 0h2v-2q-.825 0-1.412.588T19 14m-5-1q1.25 0 2.125-.875T17 10q0-1.25-.875-2.125T14 7q-1.25 0-2.125.875T11 10q0 1.25.875 2.125T14 13M7 8q.825 0 1.413-.587T9 6H7zm14 0V6h-2q0 .825.588 1.413T21 8"/></svg>
-                        </button>
                       </td>
                       <td>
                         {isOpen && (
@@ -315,72 +280,6 @@ const MembershipMembers = () => {
                                     className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none"
                                   >
                                     Cancel
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </td>
-                      <td>
-                        {isPaymentOpen && (
-                          <div className="fixed z-10 inset-0 overflow-y-auto ">
-                            <div className="flex items-center justify-center min-h-screen bg-slate-900 opacity-50">
-                              <div className="relative bg-white  p-12 rounded-md max-w-lg mx-auto">
-                                <div className="flex justify-between items-center">
-                                  <h2 className="text-lg font-bold flex items-center">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10.5 7a3 3 0 1 0 0 6a3 3 0 0 0 0-6M9 10a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0M2 6.25A2.25 2.25 0 0 1 4.25 4h12.5A2.25 2.25 0 0 1 19 6.25V11h-1.5V8.5h-.75a2.25 2.25 0 0 1-2.25-2.25V5.5h-8v.75A2.25 2.25 0 0 1 4.25 8.5H3.5v3h.75a2.25 2.25 0 0 1 2.25 2.25v.75H14V16H4.25A2.25 2.25 0 0 1 2 13.75zm2.25-.75a.75.75 0 0 0-.75.75V7h.75A.75.75 0 0 0 5 6.25V5.5zM17.5 7v-.75a.75.75 0 0 0-.75-.75H16v.75c0 .414.336.75.75.75zm-14 6.75c0 .414.336.75.75.75H5v-.75a.75.75 0 0 0-.75-.75H3.5zm.901 3.75H14V19H7a3 3 0 0 1-2.599-1.5M22 11V9a3 3 0 0 0-1.5-2.599V11zm-5.5 1a1.5 1.5 0 0 0-1.5 1.5v8a1.5 1.5 0 0 0 1.5 1.5h5a1.5 1.5 0 0 0 1.5-1.5v-8a1.5 1.5 0 0 0-1.5-1.5zm.5 4.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1 0-1z"/></svg>
-                                    Membership Payment
-                                  </h2>
-                                  <button
-                                    onClick={togglePaymentModal}
-                                    className="text-gray-500 hover:text-gray-700 focus:outline-none relative top-[-15px]"
-                                  >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="1.2rem"
-                                      height="1.2rem"
-                                      viewBox="0 0 15 15"
-                                    >
-                                      <path
-                                        fill="currentColor"
-                                        fill-rule="evenodd"
-                                        d="M11.782 4.032a.575.575 0 1 0-.813-.814L7.5 6.687L4.032 3.218a.575.575 0 0 0-.814.814L6.687 7.5l-3.469 3.468a.575.575 0 0 0 .814.814L7.5 8.313l3.469 3.469a.575.575 0 0 0 .813-.814L8.313 7.5z"
-                                        clip-rule="evenodd"
-                                      />
-                                    </svg>
-                                  </button>
-                                </div>
-                                <div className="mt-4">
-                                  <form onSubmit={handleSubmit}>
-                                    <div className="mb-6">
-                                      <label className="text-md font-bold mb-2">
-                                        Pay Amount
-                                      </label>
-                                      <input
-                                        type="number"
-                                        name="pay_amount"
-                                        value={formData.pay_amount}
-                                        onChange={handleChange}
-                                        placeholder="Enter Pay Amount"
-                                        className="px-3 py-2 w-full border-none rounded-sm focus:outline-none focus:ring-2 focus:ring-[#0E4EFB] focus:border-transparent"
-                                      />
-                                    </div>
-                                    <button
-                                      type="submit"
-                                      className="bg-blue-500 text-white py-2 px-4 rounded-md focus:outline-none"
-                                    >
-                                      Update
-                                    </button>
-                                  </form>
-                                </div>
-
-                                <div className="mt-6 flex justify-end">
-                                  <button
-                                    onClick={togglePaymentModal}
-                                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none"
-                                  >
-                                    Close
                                   </button>
                                 </div>
                               </div>

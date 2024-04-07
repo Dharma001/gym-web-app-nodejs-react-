@@ -30,12 +30,24 @@ const MembershipMembers = () => {
     pay_amount: "",
   });
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === 'pay_amount') {
+      const { membership, pay_amount, discount } = membershipMembers.find(member => member.id === selectedMemberId);
+      const dueAmount = parseFloat(membership.price) - (parseFloat(pay_amount) + parseFloat(discount));
+      const inputPayAmount = parseFloat(e.target.value);
+      const newPayAmount = isNaN(inputPayAmount) ? '' : Math.min(inputPayAmount, dueAmount);
+  
+      setFormData({
+        ...formData,
+        [e.target.name]: newPayAmount,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -46,7 +58,7 @@ const MembershipMembers = () => {
       );
       if (response.status === 200) {
         toast.success("Member Membership Payment Updated Successfully");
-        navigate("/admin/MembershipMembers")
+        navigate("/admin/pendingAmount")
         togglePaymentModal();
       } else {
         const errorData = await response.json();
@@ -270,7 +282,7 @@ const MembershipMembers = () => {
                       <td>
                         {isOpen && (
                           <div className="fixed z-10 inset-0 overflow-y-auto ">
-                            <div className="flex items-center justify-center min-h-screen bg-slate-900 opacity-50">
+                            <div className="flex items-center justify-center min-h-screen bg-slate-900 opacity-70">
                               <div className="relative bg-white  p-12 rounded-md max-w-lg mx-auto">
                                 <div className="flex justify-between items-center">
                                   <h2 className="text-lg font-semibold">
@@ -325,11 +337,11 @@ const MembershipMembers = () => {
                       <td>
                         {isPaymentOpen && (
                           <div className="fixed z-10 inset-0 overflow-y-auto ">
-                            <div className="flex items-center justify-center min-h-screen bg-slate-900 opacity-50">
-                              <div className="relative bg-white  p-12 rounded-md max-w-lg mx-auto">
+                            <div className="flex items-center justify-center min-h-screen bg-slate-900 opacity-60">
+                              <div className="relative bg-white  w-[80%] px-4 py-6 rounded-md max-w-lg mx-auto">
                                 <div className="flex justify-between items-center">
                                   <h2 className="text-lg font-bold flex items-center">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10.5 7a3 3 0 1 0 0 6a3 3 0 0 0 0-6M9 10a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0M2 6.25A2.25 2.25 0 0 1 4.25 4h12.5A2.25 2.25 0 0 1 19 6.25V11h-1.5V8.5h-.75a2.25 2.25 0 0 1-2.25-2.25V5.5h-8v.75A2.25 2.25 0 0 1 4.25 8.5H3.5v3h.75a2.25 2.25 0 0 1 2.25 2.25v.75H14V16H4.25A2.25 2.25 0 0 1 2 13.75zm2.25-.75a.75.75 0 0 0-.75.75V7h.75A.75.75 0 0 0 5 6.25V5.5zM17.5 7v-.75a.75.75 0 0 0-.75-.75H16v.75c0 .414.336.75.75.75zm-14 6.75c0 .414.336.75.75.75H5v-.75a.75.75 0 0 0-.75-.75H3.5zm.901 3.75H14V19H7a3 3 0 0 1-2.599-1.5M22 11V9a3 3 0 0 0-1.5-2.599V11zm-5.5 1a1.5 1.5 0 0 0-1.5 1.5v8a1.5 1.5 0 0 0 1.5 1.5h5a1.5 1.5 0 0 0 1.5-1.5v-8a1.5 1.5 0 0 0-1.5-1.5zm.5 4.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1 0-1z"/></svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" className="mr-2" viewBox="0 0 24 24"><path fill="currentColor" d="M10.5 7a3 3 0 1 0 0 6a3 3 0 0 0 0-6M9 10a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0M2 6.25A2.25 2.25 0 0 1 4.25 4h12.5A2.25 2.25 0 0 1 19 6.25V11h-1.5V8.5h-.75a2.25 2.25 0 0 1-2.25-2.25V5.5h-8v.75A2.25 2.25 0 0 1 4.25 8.5H3.5v3h.75a2.25 2.25 0 0 1 2.25 2.25v.75H14V16H4.25A2.25 2.25 0 0 1 2 13.75zm2.25-.75a.75.75 0 0 0-.75.75V7h.75A.75.75 0 0 0 5 6.25V5.5zM17.5 7v-.75a.75.75 0 0 0-.75-.75H16v.75c0 .414.336.75.75.75zm-14 6.75c0 .414.336.75.75.75H5v-.75a.75.75 0 0 0-.75-.75H3.5zm.901 3.75H14V19H7a3 3 0 0 1-2.599-1.5M22 11V9a3 3 0 0 0-1.5-2.599V11zm-5.5 1a1.5 1.5 0 0 0-1.5 1.5v8a1.5 1.5 0 0 0 1.5 1.5h5a1.5 1.5 0 0 0 1.5-1.5v-8a1.5 1.5 0 0 0-1.5-1.5zm.5 4.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1 0-1z"/></svg>
                                     Membership Payment
                                   </h2>
                                   <button
@@ -351,6 +363,7 @@ const MembershipMembers = () => {
                                     </svg>
                                   </button>
                                 </div>
+                                <p className="text-red-500">Note: You cant pay more than the due amount</p>
                                 <div className="mt-4">
                                   <form onSubmit={handleSubmit}>
                                     <div className="mb-6">
@@ -363,14 +376,15 @@ const MembershipMembers = () => {
                                         value={formData.pay_amount}
                                         onChange={handleChange}
                                         placeholder="Enter Pay Amount"
-                                        className="px-3 py-2 w-full border-none rounded-sm focus:outline-none focus:ring-2 focus:ring-[#0E4EFB] focus:border-transparent"
+                                        className="px-3 py-2 w-full border-2 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#0E4EFB] focus:border-transparent"
                                       />
                                     </div>
                                     <button
                                       type="submit"
-                                      className="bg-blue-500 text-white py-2 px-4 rounded-md focus:outline-none"
+                                      className="bg-indigo-500 text-white py-2 px-4 rounded-sm hover:bg-indigo-700 focus:outline-none flex"
                                     >
-                                      Update
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="mr-2" width="1.2rem" height="1.2rem" viewBox="0 0 24 24"><path fill="currentColor" d="M10.5 7a3 3 0 1 0 0 6a3 3 0 0 0 0-6M9 10a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0M2 6.25A2.25 2.25 0 0 1 4.25 4h12.5A2.25 2.25 0 0 1 19 6.25V11h-1.5V8.5h-.75a2.25 2.25 0 0 1-2.25-2.25V5.5h-8v.75A2.25 2.25 0 0 1 4.25 8.5H3.5v3h.75a2.25 2.25 0 0 1 2.25 2.25v.75H14V16H4.25A2.25 2.25 0 0 1 2 13.75zm2.25-.75a.75.75 0 0 0-.75.75V7h.75A.75.75 0 0 0 5 6.25V5.5zM17.5 7v-.75a.75.75 0 0 0-.75-.75H16v.75c0 .414.336.75.75.75zm-14 6.75c0 .414.336.75.75.75H5v-.75a.75.75 0 0 0-.75-.75H3.5zm.901 3.75H14V19H7a3 3 0 0 1-2.599-1.5M22 11V9a3 3 0 0 0-1.5-2.599V11zm-5.5 1a1.5 1.5 0 0 0-1.5 1.5v8a1.5 1.5 0 0 0 1.5 1.5h5a1.5 1.5 0 0 0 1.5-1.5v-8a1.5 1.5 0 0 0-1.5-1.5zm.5 4.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1 0-1z"/></svg>
+ pay
                                     </button>
                                   </form>
                                 </div>

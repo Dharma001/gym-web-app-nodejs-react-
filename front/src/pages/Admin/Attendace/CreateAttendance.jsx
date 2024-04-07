@@ -41,12 +41,11 @@ function CreateAttendance() {
 
     setLoading(true);
     try {
-      // Send a request to create attendance records for the selected date
       const response = await fetchWithAuth('post', 'attendance', { date });
       if (response.status === 201) {
         toggleModal();
         toast.success("Attendance records created successfully for the selected date");
-        fetchAttendanceData(); // Fetch updated attendance data
+        fetchAttendanceData();
       } else {
         setError('Failed to create attendance records');
         toast.error("Failed to create attendance records");
@@ -63,11 +62,10 @@ function CreateAttendance() {
   const updateAttendanceStatus = async (id, newStatus) => {
     setLoading(true);
     try {
-      // Send a request to update the status of the attendance record
       const response = await fetchWithAuth("patch", `attendance/${id}`, { status: newStatus });
       if (response.status === 200) {
         toast.success("Attendance record updated successfully");
-        fetchAttendanceData(); // Fetch updated attendance data
+        fetchAttendanceData();
       } else {
         setError('Failed to update attendance record');
         toast.error("Failed to update attendance record");
