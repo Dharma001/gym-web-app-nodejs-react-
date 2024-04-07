@@ -26,7 +26,6 @@ function ContactUS() {
         try {
             const response = await fetchApi('post', 'contacts', formData);
             if (response.status === 201) {
-                // Reset form data
                 setFormData({
                     firstName: '',
                     lastName: '',
@@ -34,17 +33,13 @@ function ContactUS() {
                     phone: '',
                     description: ''
                 });
-                // Navigate to the desired location
                 navigate("/");
-                // Show success toast
                 toast.success("Your message has been sent successfully");
             } else {
-                // Handle error response
                 const errorData = await response.json();
                 setError(errorData.message);
             }
         } catch (error) {
-            // Handle fetch error
             setError(error.message);
         }
     };
@@ -133,6 +128,7 @@ function ContactUS() {
                                     className="px-2 py-3 bg-white w-full text-sm border-b-2 focus:border-[#011c2b] outline-none" 
                                     value={formData.firstName}
                                     onChange={handleChange}
+                                    required
                                     />
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-[18px] h-[18px] absolute right-2"
                                     viewBox="0 0 24 24">
@@ -147,6 +143,7 @@ function ContactUS() {
                                     className="px-2 py-3 bg-white w-full text-sm border-b-2 focus:border-[#011c2b] outline-none"
                                     value={formData.lastName}
                                 name='lastName'
+                                required
                                     onChange={handleChange}
                                      />
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-[18px] h-[18px] absolute right-2"
@@ -163,6 +160,7 @@ function ContactUS() {
                                 placeholder="Phone No."
                                     className="px-2 py-3 bg-white text-black w-full text-sm border-b-2 focus:border-[#011c2b] outline-none" 
                                     value={formData.phone}
+                                    required
                                     onChange={handleChange} />
                                 <svg fill="#bbb" className="w-[18px] h-[18px] absolute right-2" viewBox="0 0 64 64">
                                     <path
@@ -175,6 +173,7 @@ function ContactUS() {
                                 name='email'
                                     className="px-2 py-3 bg-white text-black w-full text-sm border-b-2 focus:border-[#011c2b] outline-none"  
                                     value={formData.email}
+                                    required
                                     onChange={handleChange}
                                     />
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-[18px] h-[18px] absolute right-2"
@@ -197,8 +196,9 @@ function ContactUS() {
                             <div className="relative flex items-center sm:col-span-2">
                                 <textarea placeholder="Write Message" 
                                 name='description'
-                                            value={formData.description}
-                                            onChange={handleChange}
+                                 value={formData.description}
+                                    onChange={handleChange}
+                                    required
                                     className="px-2 pt-3 bg-white text-black w-full text-sm border-b-2 focus:border-[#011c2b] outline-none"></textarea>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-[18px] h-[18px] absolute right-2"
                                     viewBox="0 0 682.667 682.667">
