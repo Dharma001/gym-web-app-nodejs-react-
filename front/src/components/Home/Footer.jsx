@@ -62,19 +62,7 @@ function Footer() {
           </h4>
           <ul class="mt-4 space-y-5">
             <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Web Development</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Pricing</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Support</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Client Portal</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Resources</a>
+              <a href='#services' class='hover:text-white text-gray-300 text-sm'>Memberships</a>
             </li>
           </ul>
         </div>
@@ -89,16 +77,7 @@ function Footer() {
           </h4>
           <ul class="space-y-5 mt-4 max-sm:hidden">
             <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Hubspot</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Integration Services</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Marketing Glossar</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>UIPath</a>
+              <a href='#contact' class='hover:text-white text-gray-300 text-sm'>Contact Us</a>
             </li>
           </ul>
         </div>
@@ -113,19 +92,7 @@ function Footer() {
           </h4>
           <ul class="space-y-5 mt-4 max-sm:hidden">
             <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>About us</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Careers</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Blog</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Portfolio</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Events</a>
+              <a href='#aboutUs' class='hover:text-white text-gray-300 text-sm'>About us</a>
             </li>
           </ul>
         </div>
@@ -140,20 +107,9 @@ function Footer() {
           </h4>
           <ul class="space-y-5 mt-4 max-sm:hidden">
             <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>FAQ</a>
+              <a href='/' class='hover:text-white text-gray-300 text-sm'>Home</a>
             </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Partners</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Sitemap</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>Contact</a>
-            </li>
-            <li>
-              <a href='' class='hover:text-white text-gray-300 text-sm'>News</a>
-            </li>
+
           </ul>
         </div>
       </div>
