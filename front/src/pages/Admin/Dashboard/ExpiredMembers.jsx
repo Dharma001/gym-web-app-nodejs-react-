@@ -66,8 +66,13 @@ const  ExpiredMembers = () => {
 
   return (
     <div className="px-4 py-4">
-      <Link to="/admin/CreateMembershipMember" className="bg-indigo-500 px-5 py-2 my-6 text-white text-lg rounded-md inline-block"><i className="fas fa-plus"></i> Create Membership</Link>
-      <h2 className="text-2xl font-bold mb-4">All Membership Members</h2>
+      <Link
+        to="/admin/CreateMembershipMember"
+        className="bg-indigo-500 float-right px-5 py-2 my-6 text-white text-lg rounded-sm inline-block"
+      >
+        <i className="fas fa-plus"></i> Create Membership
+      </Link>
+            <h2 className="text-2xl font-bold mb-4">All Membership Members</h2>
       <div className="my-4 w-[35%] border flex justify-center items-center border-gray-300">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -104,32 +109,32 @@ const  ExpiredMembers = () => {
         <table className="w-full border border-gray-200 divide-y divide-gray-200">
           <thead className="bg-slate-800">
             <tr>
-              <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">SN</th>
-              <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">User Name</th>
-              <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">Membership Name</th>
-              <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">Start Date</th>
-              <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">End Date</th>
-              <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">Pay Amount</th>
-              <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">Discount</th>
-              <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">Due Amount</th>
-              <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">Status</th>
-              <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">Paid Status</th>
-              <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">Actions</th>
+              <th className="px-4 text-white py-3 text-[.7rem] font-semibold uppercase tracking-wider">SN</th>
+              <th className="px-4 text-white py-3 text-[.7rem] font-semibold uppercase tracking-wider">User Name</th>
+              <th className="px-4 text-white py-3 text-[.7rem] font-semibold uppercase tracking-wider">Membership Name</th>
+              <th className="px-4 text-white py-3 text-[.7rem] font-semibold uppercase tracking-wider">Start Date</th>
+              <th className="px-4 text-white py-3 text-[.7rem] font-semibold uppercase tracking-wider">End Date</th>
+              <th className="px-4 text-white py-3 text-[.7rem] font-semibold uppercase tracking-wider">Pay Amount</th>
+              <th className="px-4 text-white py-3 text-[.7rem] font-semibold uppercase tracking-wider">Discount</th>
+              <th className="px-4 text-white py-3 text-[.7rem] font-semibold uppercase tracking-wider">Due Amount</th>
+              <th className="px-4 text-white py-3 text-[.7rem] font-semibold uppercase tracking-wider">Status</th>
+              <th className="px-4 text-white py-3 text-[.7rem] font-semibold uppercase tracking-wider">Paid Status</th>
+              <th className="px-4 text-white py-3 text-[.7rem] font-semibold uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {filteredMembershipMembers.map((member,index) => (
               <tr key={member.id} className="hover:bg-gray-100">
-                <td className="px-6 py-4 whitespace-nowrap text-md">{index+1}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-md">{member.user.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-md">{member.membership.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-md">{formatDate(member.start_date)}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-md">{formatDate(member.end_date)}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-md">{member.pay_amount}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-md">{member.discount}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-md">{member.membership.price - member.pay_amount - member.discount}</td>
+                <td className="px-4 py-4 whitespace-nowrap text-md">{index+1}</td>
+                <td className="px-4 py-4 whitespace-nowrap text-md">{member.user.name}</td>
+                <td className="px-4 py-4 whitespace-nowrap text-md">{member.membership.name}</td>
+                <td className="px-4 py-4 whitespace-nowrap text-md">{formatDate(member.start_date)}</td>
+                <td className="px-4 py-4 whitespace-nowrap text-md">{formatDate(member.end_date)}</td>
+                <td className="px-4 py-4 whitespace-nowrap text-md">{member.pay_amount}</td>
+                <td className="px-4 py-4 whitespace-nowrap text-md">{member.discount}</td>
+                <td className="px-4 py-4 whitespace-nowrap text-md">{member.membership.price - member.pay_amount - member.discount}</td>
                 <td>
-                  <p className={`px-6 py-2 rounded-sm text-white font-semibold whitespace-nowrap text-md ${membershipStatus(member) === 'Active' ? 'bg-green-500' : 'bg-red-500'}`}>
+                  <p className={`px-4 py-2 rounded-sm text-white font-semibold whitespace-nowrap text-md ${membershipStatus(member) === 'Active' ? 'bg-green-500' : 'bg-red-500'}`}>
                     {membershipStatus(member)}
                   </p>
                 </td>
@@ -137,7 +142,7 @@ const  ExpiredMembers = () => {
   <p className='px-4 text-center py-2 rounded-sm text-black font-semibold whitespace-nowrap text-md' style={{ backgroundColor: member.status === 'pending' ? 'yellow' : 'red' }}>{member.status}</p>
 </td>
 
-                <td className="px-6 py-4 whitespace-nowrap text-md text-center">
+                <td className="px-4 py-4 whitespace-nowrap text-md text-center">
   <button
     onClick={toggleModal}
     className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-sm transition duration-300 ease-in-out flex items-center"

@@ -42,6 +42,7 @@ const CreateSurvey = () => {
       <h2 className="text-2xl font-bold mb-4">Create Survey</h2>
       {error && <p className="text-red-500">Error: {error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="grid gap-4">
         <div>
           <label htmlFor="title" className="block">Title:</label>
           <input
@@ -67,22 +68,21 @@ const CreateSurvey = () => {
             class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
         </div>
-
+        </div>
         <div>
           <label htmlFor="url" className="block">URL:</label>
-          <input
-            type="text"
+          <textarea
             id="url"
             name="url"
             placeholder="Enter survey URL"
             value={formData.url}
             onChange={handleChange}
             required
-            class="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
+            className="border border-gray-500 focus:border rounded-sm px-6 py-3 w-full"
           />
-        </div>
 
-        <button type="submit" className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Create Survey</button>
+        </div>
+        <button type="submit" className="bg-indigo-500 float-right  text-white px-4 py-2 rounded-sm hover:bg-blue-600">Create Survey</button>
       </form>
     </div>
   );

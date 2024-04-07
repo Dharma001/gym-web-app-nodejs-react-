@@ -11,9 +11,9 @@ export const createMembershipMember = async (req, res) => {
       return res.status(404).json({ message: 'Membership not found' });
     }
 
-    const totalAmount = membership.price + discount;
+    const totalAmount = pay_amount + discount;
 
-    const status = pay_amount <= totalAmount ? 'pending' : 'paid';
+    const status = totalAmount <= membership.price ? 'pending' : 'paid';
 
     const durationInDays = membership.duration;
     const end_date = new Date(start_date);
@@ -36,6 +36,39 @@ export const createMembershipMember = async (req, res) => {
   }
 };
 
+export const updateMembershipMemberPayment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { pay_amount } = req.body;
+    
+    const membershipMember = await MembershipMember.findByPk(id);
+
+    if (!membershipMember) {
+      return res.status(404).json({ message: 'Membership member not found' });
+    }
+
+    const membership = await Membership.findByPk(membershipMember.membership_id);
+    
+    const oldPayAmount = membershipMember.pay_amount;
+
+    const totalAmount = pay_amount + membershipMember.discount;
+    const status = totalAmount <= membership.price ? 'pending' : 'paid';
+    const pay_new = parseFloat(oldPayAmount) + parseFloat(pay_amount)
+    membershipMember.pay_amount = parseFloat(pay_new);
+    membershipMember.status = status;
+    
+    await membershipMember.save();
+
+    res.status(200).json({ 
+      message: 'Membership member payment updated successfully', 
+      oldPayAmount,
+      membershipMember 
+    });
+  } catch (error) {
+    console.error('Error updating membership member payment:', error);
+    res.status(500).json({ message: 'Failed to update membership member payment' });
+  }
+};
 
 export const getAllMembershipMembers = async (req, res) => {
   try {

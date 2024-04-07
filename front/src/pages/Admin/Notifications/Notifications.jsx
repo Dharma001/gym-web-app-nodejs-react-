@@ -48,11 +48,11 @@ const Notifications = () => {
             <table className="w-full border border-gray-200 divide-y divide-gray-200">
               <thead className="bg-slate-800">
                 <tr>
-                  <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">ID</th>
-                  <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">Title</th>
-                  <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">Description</th>
-                  <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">Announcement Date</th>
-                  <th className="px-6 text-white py-3 text-[.9rem] font-semibold uppercase tracking-wider">Actions</th>
+                  <th className="px-6 text-white py-3 text-[.7rem] xl:text-[.9rem] font-semibold uppercase tracking-wider">ID</th>
+                  <th className="px-6 text-white py-3 text-[.7rem] xl:text-[.9rem] font-semibold uppercase tracking-wider">Title</th>
+                  <th className="px-6 text-white py-3 text-[.7rem] xl:text-[.9rem] font-semibold uppercase tracking-wider">Description</th>
+                  <th className="px-6 text-white py-3 text-[.7rem] xl:text-[.9rem] font-semibold uppercase tracking-wider">Announcement Date</th>
+                  <th className="px-6 text-white py-3 text-[.7rem] xl:text-[.9rem] font-semibold uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">

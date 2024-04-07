@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { fetchWithAuth } from '../../../Auths/api';
+import Cookies from "js-cookie";
 
 const CreateAppointment = () => {
   const navigate = useNavigate();
+  const user_id = Cookies.get("userId");
   const [formData, setFormData] = useState({
+    user_id: user_id,
     first_name: "",
     last_name: "",
     email: "",
     appointment_date: "",
     appointment_time: "",
-    // Add more fields as needed
   });
   const [error, setError] = useState(null);
   const [errors, setErrors] = useState({});
@@ -29,7 +31,7 @@ const CreateAppointment = () => {
     try {
       const response = await fetchWithAuth("post", "appointments", formData);
       if (response.status === 201) {
-        navigate("/admin/appointments");
+        navigate("/member/memberAppointment");
         toast.success("Appointment Created Successfully");
       } else {
         const errorData = await response.json();

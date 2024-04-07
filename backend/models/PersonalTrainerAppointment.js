@@ -7,6 +7,10 @@ const PersonalTrainerAppointment = db.define('personaltrainerappointment', {
         primaryKey: true,
         autoIncrement: true
     },
+    user_id: { 
+      type: Sequelize.BIGINT,
+      allowNull: false,
+    },
     first_name: {
         type: Sequelize.STRING(50),
         allowNull: false
