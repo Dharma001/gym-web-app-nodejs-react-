@@ -73,7 +73,7 @@ function GymDashboard() {
         </div>
         <div className="border-gray-500 border-b my-5"></div>
         <div className="mt-4">
-        <Link to="/member">
+        <Link to="memberDashboard">
             <p className="text-md my-3 font-medium  w-full text-white  hover:bg-slate-500 bg-gradient-to-br from-purple-500 to-indigo-500 px-5 py-3">
                 <i class="fa-solid fa-house mr-1 text-sm"></i> Dashboard
                 </p>

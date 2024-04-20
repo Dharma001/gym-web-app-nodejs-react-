@@ -17,7 +17,7 @@ const Attendance = db.define('Attendance', {
     allowNull: false
   },
   status: {
-    type: Sequelize.ENUM('Present', 'Absent','Late'), 
+    type: Sequelize.ENUM('Pending', 'Accept', 'Reject', 'Completed'),
     allowNull: false
   },
   createdAt: {

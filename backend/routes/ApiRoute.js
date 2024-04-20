@@ -65,12 +65,11 @@ router.delete("/notifications/:id", verifyToken, checkAdminRole, deleteNotificat
 router.post("/contacts" , createContact);
 router.get("/contacts", verifyToken, checkAdminRole, getAllContacts);
 router.delete("/contacts/:id", verifyToken, checkAdminRole, deleteContact);
-router.patch('/membershipMembers/:id/payment',verifyToken, checkAdminRole, updateMembershipMemberPayment);
+router.patch('/membershipMembers/:id/payment',verifyToken, checkAdminRole, updateMembershipMemberPayment)
 
 router.get('/attendances', verifyToken, checkAdminRole, getAllAttendanceWithUsers);
 router.post('/attendance',  verifyToken, checkAdminRole, createAttendanceForCurrentDate); 
-router.patch('attendance/:id',verifyToken, checkAdminRole,  updateAttendanceStatus);
-
+router.patch('/attendance/:id/status', verifyToken, checkAdminRole, updateAttendanceStatus);
 router.post('/appointments', verifyToken, checkUserRole,createAppointment);
 router.get('/appointments', verifyToken, checkAdminRole, getAllAppointments);
 router.get('/userAppointments/:userId', verifyToken, checkUserRole, getAllUserAppointments);

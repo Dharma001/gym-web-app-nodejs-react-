@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Users from "./pages/Admin/Users/Users";
 import CreateUser from "./pages/Admin/Users/CreateUser";
 import MemberDashboard from "./Layouts/MemberDashboard";
+import DashboardMember from "./pages/Members/Dashboard";
 import GymDashboard from "./Layouts/GymDashboard";
 import Dashboard from "./pages/Admin/Dashboard";
 import CreateMembership from "./pages/Admin/Membership/CreateMembership";
@@ -359,7 +360,18 @@ function App() {
               />
             }
           />
-                                        <Route
+                                <Route
+          path="memberDashboard"
+          element={
+            <PrivateMemberRoute
+              element={<DashboardMember />}
+              authenticated={isAuthenticated()}
+              isMember={isMember()}
+              redirectTo="/login"
+            />
+          }
+        />
+                          <Route
             path="memberProfile/:id"
             element={
               <PrivateMemberRoute

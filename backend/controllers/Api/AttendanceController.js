@@ -1,6 +1,7 @@
 import Users from "../../models/User.js";
 import User from "../../models/User.js";
 import Attendance from "../../models/Attendance.js";
+import { Op } from 'sequelize';
 
 export const createAttendanceForCurrentDate = async (req, res) => {
   try {
@@ -27,7 +28,19 @@ export const createAttendanceForCurrentDate = async (req, res) => {
 
 export const getAllAttendanceWithUsers = async (req, res) => {
   try {
+    const { date } = req.query;
+    let whereCondition = {};
+
+    if (date) {
+      whereCondition = {
+        date: {
+          [Op.eq]: date,
+        },
+      };
+    }
+
     const attendance = await Attendance.findAll({
+      where: whereCondition,
       include: [
         { model: User, attributes: ['id', 'name', 'phone', 'memberId', 'email'] },
       ],
@@ -36,29 +49,27 @@ export const getAllAttendanceWithUsers = async (req, res) => {
     res.json(attendance);
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ message: "Failed to fetch attendance records" });
   }
 }
+
 export const updateAttendanceStatus = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
   try {
-    const { id } = req.params; 
-    const { status } = req.body;
-
-    if (!status || (status !== 'Present' && status !== 'Absent' && status !== 'Late')) {
-      return res.status(400).json({ error: 'Invalid status value' });
-    }
-
     const attendance = await Attendance.findByPk(id);
     if (!attendance) {
-      return res.status(404).json({ error: 'Attendance record not found' });
+      return res.status(404).json({ message: 'Attendance record not found' });
+    }
+    if (status !== 'Present' && status !== 'Absent' && status !== 'Late') {
+      return res.status(400).json({ message: 'Invalid status value' });
     }
 
     attendance.status = status;
     await attendance.save();
 
-    return res.json({ message: 'Attendance record updated successfully' });
+    return res.status(200).json({ message: 'Attendance record updated successfully', attendance });
   } catch (error) {
-    console.error('Error updating attendance record:', error);
-    return res.status(500).json({ error: 'Failed to update attendance record' });
+    return res.status(500).json({ message: 'Error updating attendance record', error: error.message });
   }
 };
