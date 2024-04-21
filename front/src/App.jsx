@@ -32,6 +32,11 @@ import EditUser from "./pages/Admin/Users/EditUser";
 import Profile from "./pages/Admin/Users/Profile";
 import MemberProfile from "./pages/Members/MemberProfile";
 import MemberAppointments from "./pages/Members/Appointment/MemberAppointments";
+import MembershipHistory from "./pages/Members/MembershipHistory";
+import Workouts from "./pages/Admin/WorkOuts/Workouts";
+import CreateWorkout from "./pages/Admin/WorkOuts/CreateWorkouts";
+import UserWorkouts from "./pages/Members/UserWorkouts";
+import ShowWorkout from "./pages/Members/showWorkout";
 
 function isAuthenticated() {
   const accessToken = Cookies.get("accessToken");
@@ -271,6 +276,29 @@ function App() {
               />
             }
           />
+                    <Route
+            path="workouts"
+            element={
+              <PrivateAdminRoute
+                element={< Workouts/>}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+                              <Route
+            path="CreateWorkout"
+            element={
+              <PrivateAdminRoute
+                element={< CreateWorkout/>}
+                authenticated={isAuthenticated()}
+                isAdmin={isAdmin()}
+                redirectTo="/login"
+              />
+            }
+          />
+
           <Route
             path="paidAmount"
             element={
@@ -371,6 +399,17 @@ function App() {
             />
           }
         />
+                                        <Route
+          path="membershipHistory"
+          element={
+            <PrivateMemberRoute
+              element={<MembershipHistory />}
+              authenticated={isAuthenticated()}
+              isMember={isMember()}
+              redirectTo="/login"
+            />
+          }
+        />
                           <Route
             path="memberProfile/:id"
             element={
@@ -387,6 +426,28 @@ function App() {
             element={
               <PrivateMemberRoute
                 element={<MemberAppointments />}
+                authenticated={isAuthenticated()}
+                isAdmin={isMember()}
+                redirectTo="/login"
+              />
+            }
+          />
+                                        <Route
+            path="userWorkouts"
+            element={
+              <PrivateMemberRoute
+                element={<UserWorkouts />}
+                authenticated={isAuthenticated()}
+                isAdmin={isMember()}
+                redirectTo="/login"
+              />
+            }
+          />
+                                                  <Route
+            path="showWorkout/:id"
+            element={
+              <PrivateMemberRoute
+                element={<ShowWorkout />}
                 authenticated={isAuthenticated()}
                 isAdmin={isMember()}
                 redirectTo="/login"

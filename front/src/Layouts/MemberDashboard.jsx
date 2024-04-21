@@ -99,6 +99,20 @@ function GymDashboard() {
             <svg xmlns="http://www.w3.org/2000/svg" width="1.54em" height="1.5rem" className="mr-2"  viewBox="0 0 15 15"><path fill="currentColor" fill-rule="evenodd" d="M12 2h1.5A1.5 1.5 0 0 1 15 3.5v10a1.5 1.5 0 0 1-1.5 1.5h-12A1.5 1.5 0 0 1 0 13.5v-10A1.5 1.5 0 0 1 1.5 2H3V0h1v2h7V0h1zM6 8H3V7h3zm6-1H9v1h3zm-6 4H3v-1h3zm3 0h3v-1H9z" clip-rule="evenodd"/></svg>             Appointments
                 </li>
               </Link>
+              <Link to="membershipHistory">
+            <li className="text-[16px] my-3 font-light  text-black w-full flex hover:bg-purple-200  px-5 py-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.54em" height="1.5rem" className="mr-2"  
+       viewBox="0 0 1536 1536"><path fill="currentColor" d="M1536 768q0 156-61 298t-164 245t-245 164t-298 61q-172 0-327-72.5T177 1259q-7-10-6.5-22.5t8.5-20.5l137-138q10-9 25-9q16 2 23 12q73 95 179 147t225 52q104 0 198.5-40.5T1130 1130t109.5-163.5T1280 768t-40.5-198.5T1130 406T966.5 296.5T768 256q-98 0-188 35.5T420 393l137 138q31 30 14 69q-17 40-59 40H64q-26 0-45-19T0 576V128q0-42 40-59q39-17 69 14l130 129Q346 111 483.5 55.5T768 0q156 0 298 61t245 164t164 245t61 298M896 480v448q0 14-9 23t-23 9H544q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h224V480q0-14 9-23t23-9h64q14 0 23 9t9 23"/></svg> 
+            Membership History
+                </li>
+              </Link>
+              <Link to="userWorkouts">
+            <li className="text-[16px] my-3 font-light  text-black w-full flex hover:bg-purple-200  px-5 py-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.54em" height="1.5rem" className="mr-2" 
+            viewBox="0 0 48 48"><path fill="currentColor" fill-rule="evenodd" d="M9 6a3 3 0 0 0-3 3v30a3 3 0 0 0 3 3h30a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3zm23 10h-3v16h3zm2 3h3v4h1v2h-1v4h-3zM16 32h3V16h-3zm-2-3h-3v-4h-1v-2h1v-4h3zm7-4h6v-2h-6z" clip-rule="evenodd"/></svg>
+           All Workouts
+                </li>
+              </Link>
           </ul>
         </div>
       </aside>

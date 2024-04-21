@@ -12,7 +12,7 @@ import { checkAdminRole } from "../middleware/AdminMiddleware.js";
 import { getRoles } from "../controllers/Api/RoleController.js";
 import { createMembership, deleteMembershipById, getMembershipById, getMemberships } from "../controllers/Api/MembershipController.js";
 import { uploadMemberImage } from "../multer/MembershipImage.js";
-import { createMembershipMember, deleteMembershipMemberById, getAllMembershipMembers, getMembershipMemberById, updateMembershipMemberById, updateMembershipMemberPayment } from "../controllers/Api/MemberMembershipController.js";
+import { createMembershipMember, deleteMembershipMemberById, getAllMembershipMembers, getMembershipByUserId, getMembershipMemberById, updateMembershipMemberById, updateMembershipMemberPayment } from "../controllers/Api/MemberMembershipController.js";
 import { createNotification, deleteNotificationById, getAllNotifications, updateNotificationById } from "../controllers/Api/NotificationController.js";
 import { checkUserRole } from "../middleware/UserMiddleware.js";
 import { createContact, deleteContact, getAllContacts } from "../controllers/ContactController.js";
@@ -20,6 +20,8 @@ import { createAttendanceForCurrentDate, getAllAttendanceWithUsers, updateAttend
 import { createAppointment, deleteAppointmentById, getAllAppointments, getAllUserAppointments } from "../controllers/Api/PersonalTrainerAppointmentController.js";
 import { createSurvey, deleteSurveyById, getAllSurveys } from "../controllers/Api/SurveyController.js";
 import { getExpiredMembers, getExpiredMembersCount, getExpiringMembers, getExpiringMembersCount, getPaidMembers, getPendingMembers, getTotalEarnedAmount, getTotalPendingAmount } from "../controllers/Api/DahboardController.js";
+import { uploadWorkOutImage } from "../multer/WorkoutImage.js";
+import { createWorkout, deleteWorkoutById, getAllWorkouts, getWorkoutById, updateWorkoutById } from "../controllers/Api/WorkoutController.js";
 const router = express.Router();
 router.post("/login", Login);
 
@@ -38,6 +40,14 @@ router.get('/expiringMembersCount', verifyToken, checkAdminRole, getExpiringMemb
 router.get('/expiredMembers',verifyToken, checkAdminRole, getExpiredMembers);
 router.get('/expiringMembers', verifyToken, checkAdminRole, getExpiringMembers);
 
+
+router.get("/workouts", verifyToken, checkAdminRole, getAllWorkouts);
+router.post("/createWorkout",uploadWorkOutImage, verifyToken, checkAdminRole, createWorkout);
+router.get("/getWorkout/:id", verifyToken, checkUserRole, getWorkoutById);
+router.get("/userWorkouts", verifyToken, checkUserRole, getAllWorkouts);
+router.delete('/deleteWorkout/:id',verifyToken, checkAdminRole, deleteWorkoutById);
+
+
 router.put("/updateMember/:id",uploadUserImage, verifyToken, checkUserRole, updateUserById);
 router.get("/getMember/:id", verifyToken, checkUserRole, getUserById);
 
@@ -46,6 +56,8 @@ router.get('/memberships', verifyToken, checkAdminRole, getMemberships);
 router.get('/allMemberships', getMemberships);
 router.get('/memberships/:id',verifyToken, checkAdminRole, getMembershipById);
 router.delete('/memberships/:id',verifyToken, checkAdminRole,deleteMembershipById);
+
+router.get('/memberMembership/:user_id/memberships',verifyToken, checkUserRole,  getMembershipByUserId);
 
 router.post('/createMemberMemberships', verifyToken, checkAdminRole, createMembershipMember);
 router.post('/createUserMemberships/:user_id', verifyToken, checkAdminRole, createUsersMembership);

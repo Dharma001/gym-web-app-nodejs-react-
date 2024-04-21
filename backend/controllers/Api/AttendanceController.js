@@ -10,7 +10,7 @@ export const createAttendanceForCurrentDate = async (req, res) => {
           return res.status(400).json({ error: 'Invalid date format' });
       }
 
-      const users = await Users.findAll();
+      const users = await Users.findAll({ where: { role_id: 2 } });
 
       for (const user of users) {
           const existingAttendance = await Attendance.findOne({ where: { user_id: user.id, date } });

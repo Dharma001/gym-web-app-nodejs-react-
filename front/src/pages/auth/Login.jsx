@@ -56,7 +56,7 @@ function Login() {
         if (roleId === 1) {
           navigate("/admin/dashboard");
         } else if (roleId === 2) {
-          navigate("/member");
+          navigate("/member/memberDashboard");
         } else {
           navigate("/");
         }

@@ -86,6 +86,24 @@ export const getAllMembershipMembers = async (req, res) => {
   }
 };
 
+export const getMembershipByUserId = async (req, res) => {
+  const { user_id } = req.params;
+  try {
+    const memberships = await MembershipMember.findAll({
+      where: { user_id },
+      include: [
+        { model: User, attributes: ['id', 'name', 'email'] },
+        { model: Membership, attributes: ['id', 'name', 'price', 'duration'] }
+      ],
+      order: [['createdAt', 'DESC']]
+    });
+
+    res.json(memberships);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Failed to fetch memberships for the user' });
+  }
+};
 
 export const getMembershipMemberById = async (req, res) => {
   const { id } = req.params;
