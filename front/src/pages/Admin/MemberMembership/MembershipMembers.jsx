@@ -123,6 +123,24 @@ const MembershipMembers = () => {
     return endDate >= today ? "Active" : "Expired";
   };
 
+
+  const handleDeleteMembershipMember = async (userId) => {
+    try {
+      const response = await fetchWithAuth("delete", `delMemberships/${userId}`);
+      if (response.status === 200) {
+        setMembershipMembers(membershipMembers.filter((member) => member.id !== userId));
+        setFilteredMembershipMembers(filteredMembershipMembers.filter((member) => member.id !== userId));
+        toggleModal();
+        toast.success("Membership member deleted successfully.");
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message);
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  
   return (
     <div className="px-4 py-4">
       <Link
